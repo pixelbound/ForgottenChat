@@ -10,7 +10,6 @@ ForgottenChat_Blacklist={}
 --Randomly Accessed Runtime Variables
 local IsFCChannelsInstalled=0
 local IsFCLogInstalled=0
-local IsFCTabsInstalled=0
 local IsFCCoreInstalled=0
 local FCCCPlayerIndex=""
 FCVar_ColorChanging=""
@@ -78,10 +77,6 @@ function FCCC_RegisterAddin(which)
 	if(which=="LOG")then
 		IsFCLogInstalled=1;
 		DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r LOG Registered", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
-	end
-	if(which=="TABS")then
-		IsFCTabsInstalled=1;
-		DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r TABS Registered", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
 	end
 	if(which=="CHANNELS")then
 		IsFCChannelsInstalled=1;
