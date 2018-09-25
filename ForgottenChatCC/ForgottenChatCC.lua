@@ -172,7 +172,6 @@ function FCCC_SetupDefaultProfile(PlayerIndex)
 	FCCC_AddBlacklist("LVBM")
 	FCCC_AddBlacklist("YOU ARE THE BOMB!")
 	FCCC_AddBlacklist("YOU HAVE BURNING ADRENALINE!")
-	FCCC_AddBlacklist("You are Little Red")
 	FCCC_AddBlacklist("You are being watched!")
 end
 function FCCC_VerifySavedVariables()

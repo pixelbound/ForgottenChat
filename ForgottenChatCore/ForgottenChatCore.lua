@@ -20,7 +20,6 @@ FCVar_CurrentlyOpenEditBox=""
 local FC_CraftFrameHooked=false;
 local FC_TradeskillFrameHooked=false;
 local FC_AuctionFrameHooked=false;
-local FC_SocketButtonsHooked=false;
 local FC_TradeFrameHooked=false;
 local FC_LootRollBoxHooked=false;
 	
@@ -56,8 +55,6 @@ function FC_OnLoad()
 	hooksecurefunc("InspectPaperDollItemSlotButton_OnClick",FC_InspectPaperDollItemSlotButton_OnClick)
 	--Tradeskill and craft (enchant) frames are hooked on their respective frame OnShow events (this .xml) page
 	StackSplitFrame:SetScript("OnShow", function() if(FCVar_CurrentlyOpenEditBox~="")then this:Hide() else end end)
-	LoadAddOn("Blizzard_ItemSocketingUI")
-	FC_SetupSocketHooks()
 end
 function FC_IncomingMessage(Name, Text, afk)
 	--This function handles all incoming messages.
@@ -884,21 +881,6 @@ function FC_AuctionButton_OnClick()
 		BrowseButton_OnClick(this:GetParent());
 	end
 end
-function FC_SocketedItem_OnClick()
-	if ( IsShiftKeyDown() ) then
-		if(FCVar_CurrentlyOpenEditBox~="")then
-			local link = GetNewSocketLink(this:GetID()) or
-			             GetExistingSocketLink(this:GetID());
-			getglobal(FCVar_CurrentlyOpenEditBox):Insert(link)
-		elseif ( ChatFrameEditBox:IsVisible() ) then
-			local link = GetNewSocketLink(this:GetID()) or
-			             GetExistingSocketLink(this:GetID());
-			ChatFrameEditBox:Insert(link);
-		end
-	else
-		ClickSocketButton(this:GetID());
-	end
-end
 function FC_RecipientTradeFrame_OnClick()
 	if ( IsControlKeyDown() ) then
 		DressUpItemLink(GetTradeTargetItemLink(this:GetParent():GetID()));
@@ -976,15 +958,6 @@ function FC_SetupAuctionHooks()
 		BrowseButton7Item:SetScript("OnClick",FC_AuctionButton_OnClick)
 		BrowseButton8Item:SetScript("OnClick",FC_AuctionButton_OnClick)
 		FC_AuctionFrameHooked=true;
-	end
-end
-function FC_SetupSocketHooks()
-	if(FC_SocketButtonsHooked==false)then
-		ItemSocketingSocket1:SetScript("OnClick",FC_SocketedItem_OnClick)
-		ItemSocketingSocket2:SetScript("OnClick",FC_SocketedItem_OnClick)
-		ItemSocketingSocket3:SetScript("OnClick",FC_SocketedItem_OnClick)
-		--ItemSocketingSocketButtonTemplate:SetScript("OnClick",FC_SocketedItem_OnClick)
-		FC_SocketButtonsHooked=true
 	end
 end
 function FC_SetupTradeHooks()
