@@ -1,7 +1,0 @@
-## Interface: 11200
-## Version: 3.2
-## Title: Forgotten's Chat Channel Support
-## Notes: Channel support for ForgottenChat
-## RequiredDeps: ForgottenChatCC
-## SavedVariables: ForgottenChat_ChannelsFrames ForgottenChat_Channels
-ForgottenChatChannels.xml

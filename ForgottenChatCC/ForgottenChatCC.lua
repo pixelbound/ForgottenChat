@@ -8,7 +8,6 @@ ForgottenChat_Blacklist={}
 	
 
 --Randomly Accessed Runtime Variables
-local IsFCChannelsInstalled=0
 local IsFCLogInstalled=0
 local IsFCCoreInstalled=0
 local FCCCPlayerIndex=""
@@ -77,10 +76,6 @@ function FCCC_RegisterAddin(which)
 	if(which=="LOG")then
 		IsFCLogInstalled=1;
 		DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r LOG Registered", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
-	end
-	if(which=="CHANNELS")then
-		IsFCChannelsInstalled=1;
-		DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r CHANNELS Registered", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
 	end
 end
 function FCCC_SlashHandler(msg)
@@ -298,17 +293,10 @@ function FCCC_EnterCombat()
 	if(IsFCCoreInstalled==1)then
 		FC_EnterCombat()
 	end
-	if(IsFCChannelsInstalled==1)then
-		FCC_EnterCombat()
-	end
-	
 end
 function FCCC_ExitCombat()
 	if(IsFCCoreInstalled==1)then
 		FC_ExitCombat()
-	end
-	if(IsFCChannelsInstalled==1)then
-		FCC_ExitCombat()
 	end
 end
 
