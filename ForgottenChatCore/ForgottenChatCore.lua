@@ -838,10 +838,10 @@ function FC_Tradeskill_OnClick()
 	if ( IsControlKeyDown() ) then
 		DressUpItemLink(GetTradeSkillReagentItemLink(TradeSkillFrame.selectedSkill, this:GetID()));
 	elseif ( IsShiftKeyDown() ) then
-		if(FCVar_CurrentlyOpenEditBox~="")then
+		if (FCVar_CurrentlyOpenEditBox~="")then
 			getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetTradeSkillReagentItemLink(TradeSkillFrame.selectedSkill, this:GetID()))
-		else
-			ChatEdit_InsertLink(GetTradeSkillReagentItemLink(TradeSkillFrame.selectedSkill, this:GetID()));
+		elseif ( ChatFrameEditBox:IsVisible() ) then
+			ChatFrameEditBox:Insert(GetTradeSkillReagentItemLink(TradeSkillFrame.selectedSkill, this:GetID()));
 		end
 	end
 end
@@ -849,10 +849,10 @@ function FC_TradeskillSkill_OnClick()
 	if ( IsControlKeyDown() ) then
 		DressUpItemLink(GetTradeSkillItemLink(TradeSkillFrame.selectedSkill));
 	elseif ( IsShiftKeyDown() ) then
-		if(FCVar_CurrentlyOpenEditBox~="")then
+		if (FCVar_CurrentlyOpenEditBox~="")then
 			getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetTradeSkillItemLink(TradeSkillFrame.selectedSkill))
-		else
-			ChatEdit_InsertLink(GetTradeSkillItemLink(TradeSkillFrame.selectedSkill));
+		elseif ( ChatFrameEditBox:IsVisible() ) then
+			ChatFrameEditBox:Insert(GetTradeSkillItemLink(TradeSkillFrame.selectedSkill));
 		end
 	end
 end
@@ -860,10 +860,10 @@ function FC_CraftIcon_OnClick()
 	if ( IsControlKeyDown() ) then
 		DressUpItemLink(GetCraftItemLink(GetCraftSelectionIndex()));
 	elseif ( IsShiftKeyDown() ) then
-		if(FCVar_CurrentlyOpenEditBox~="")then
+		if (FCVar_CurrentlyOpenEditBox~="")then
 			getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetCraftItemLink(GetCraftSelectionIndex()))
-		else
-			ChatEdit_InsertLink(GetCraftItemLink(GetCraftSelectionIndex()));
+		elseif ( ChatFrameEditBox:IsVisible() ) then
+			ChatFrameEditBox:Insert(GetCraftItemLink(GetCraftSelectionIndex()));
 		end
 	end
 end
@@ -873,8 +873,8 @@ function FC_CraftReagentIcon_OnClick()
 	elseif ( IsShiftKeyDown() ) then
 		if(FCVar_CurrentlyOpenEditBox~="")then
 			getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetCraftReagentItemLink(GetCraftSelectionIndex(), this:GetID()))
-		else
-			ChatEdit_InsertLink(GetCraftReagentItemLink(GetCraftSelectionIndex(), this:GetID()));
+		elseif ( ChatFrameEditBox:IsVisible() ) then
+			ChatFrameEditBox:Insert(GetCraftReagentItemLink(GetCraftSelectionIndex(), this:GetID()));
 		end
 	end
 end
@@ -884,10 +884,9 @@ function FC_AuctionButton_OnClick()
 	elseif ( IsShiftKeyDown() ) then
 		if(FCVar_CurrentlyOpenEditBox~="")then
 			getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetAuctionItemLink("list", this:GetParent():GetID() + FauxScrollFrame_GetOffset(BrowseScrollFrame)))
-		else
-			ChatEdit_InsertLink(GetAuctionItemLink("list", this:GetParent():GetID() + FauxScrollFrame_GetOffset(BrowseScrollFrame)));
+		elseif ( ChatFrameEditBox:IsVisible() ) then
+			ChatFrameEditBox:Insert(GetAuctionItemLink("list", this:GetParent():GetID() + FauxScrollFrame_GetOffset(BrowseScrollFrame)));
 		end
-		else
 		if ( AUCTION_DISPLAY_ON_CHARACTER == "1" ) then
 			DressUpItemLink(GetAuctionItemLink("list", this:GetParent():GetID() + FauxScrollFrame_GetOffset(BrowseScrollFrame)));
 		end
@@ -900,8 +899,8 @@ function FC_RecipientTradeFrame_OnClick()
 	elseif ( IsShiftKeyDown() ) then
 		if(FCVar_CurrentlyOpenEditBox~="")then
 			getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetTradeTargetItemLink(this:GetParent():GetID()))
-		else
-			ChatEdit_InsertLink(GetTradeTargetItemLink(this:GetParent():GetID()));
+		elseif ( ChatFrameEditBox:IsVisible() ) then
+			ChatFrameEditBox:Insert(GetTradeTargetItemLink(this:GetParent():GetID()));
 		end
 	else
 		ClickTargetTradeButton(this:GetParent():GetID());
@@ -913,8 +912,8 @@ function FC_PlayerTradeFrame_OnClick()
 	elseif ( IsShiftKeyDown() ) then
 		if(FCVar_CurrentlyOpenEditBox~="")then
 			getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetTradePlayerItemLink(this:GetParent():GetID()))
-		else
-			ChatEdit_InsertLink(GetTradePlayerItemLink(this:GetParent():GetID()));
+		elseif ( ChatFrameEditBox:IsVisible() ) then
+			ChatFrameEditBox:Insert(GetTradePlayerItemLink(this:GetParent():GetID()));
 		end
 	else
 		ClickTradeButton(this:GetParent():GetID());
@@ -926,8 +925,8 @@ function FC_RollBoxFrame_OnClick()
 	elseif ( IsShiftKeyDown() ) then
 		if(FCVar_CurrentlyOpenEditBox~="")then
 			getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetLootRollItemLink(this:GetParent().rollID))
-		else
-			ChatEdit_InsertLink(GetLootRollItemLink(this:GetParent().rollID));
+		elseif ( ChatFrameEditBox:IsVisible() ) then
+			ChatFrameEditBox:Insert(GetLootRollItemLink(this:GetParent().rollID));
 		end
 	end
 end
