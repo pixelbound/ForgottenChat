@@ -52,14 +52,14 @@ function FC_OnLoad()
 	FC_hooksecurefunc("LootButton_OnModifiedClick",FC_LootButton_OnModifiedClick)
 	FC_SetupLootRollBoxHooks()
 	LoadAddOn("Blizzard_InspectUI")
-	FC_hooksecurefunc("InspectPaperDollItemSlotButton_OnClick",FC_InspectPaperDollItemSlotButton_OnClick)
+	--hooksecurefunc("InspectPaperDollItemSlotButton_OnClick",FC_InspectPaperDollItemSlotButton_OnClick)
 	--Tradeskill and craft (enchant) frames are hooked on their respective frame OnShow events (this .xml) page
 	StackSplitFrame:SetScript("OnShow", function() if(FCVar_CurrentlyOpenEditBox~="")then this:Hide() else end end)
 end
 
 function FC_hooksecurefunc(Name, Func)
-	OldFunc = getglobal(Name)
-	NewFunc = function(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
+	local OldFunc = getglobal(Name)
+	local NewFunc = function(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
 		local x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20 = OldFunc(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
 		
 		Func(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
