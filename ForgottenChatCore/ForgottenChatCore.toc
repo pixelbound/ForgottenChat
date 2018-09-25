@@ -1,4 +1,4 @@
-## Interface: 20003
+## Interface: 11200
 ## Version: 3.2
 ## Title: Forgotten's Chat System (CORE)
 ## Notes: MSN Emulator for the WoW environment
