@@ -45,14 +45,14 @@ function FC_OnLoad()
 	
 	--Set up hooks
 	FC_hooksecurefunc("ContainerFrameItemButton_OnClick",FC_ContainerFrameItemButton_OnClick)
-	--hooksecurefunc("PaperDollItemSlotButton_OnModifiedClick",FC_PaperDollItemSlotButton_OnModifiedClick)
+	FC_hooksecurefunc("PaperDollItemSlotButton_OnClick",FC_PaperDollItemSlotButton_OnClick)
 	FC_hooksecurefunc("MerchantItemButton_OnClick",FC_MerchantItemButton_OnClick)
 	FC_hooksecurefunc("BankFrameItemButtonGeneric_OnClick",FC_BankFrameItemButtonGeneric_OnClick)
 	FC_hooksecurefunc("QuestLogRewardItem_OnClick",FC_QuestLogRewardItem_OnClick)
 	FC_hooksecurefunc("LootButton_OnModifiedClick",FC_LootButton_OnModifiedClick)
 	FC_SetupLootRollBoxHooks()
 	LoadAddOn("Blizzard_InspectUI")
-	--hooksecurefunc("InspectPaperDollItemSlotButton_OnClick",FC_InspectPaperDollItemSlotButton_OnClick)
+	FC_hooksecurefunc("InspectPaperDollItemSlotButton_OnClick",FC_InspectPaperDollItemSlotButton_OnClick)
 	--Tradeskill and craft (enchant) frames are hooked on their respective frame OnShow events (this .xml) page
 	StackSplitFrame:SetScript("OnShow", function() if(FCVar_CurrentlyOpenEditBox~="")then this:Hide() else end end)
 end
@@ -774,10 +774,10 @@ function FC_ContainerFrameItemButton_OnClick(button, ignoreModifiers)
 		end
 	end
 end
-function FC_PaperDollItemSlotButton_OnModifiedClick(button)
+function FC_PaperDollItemSlotButton_OnClick(button, ignoreModifiers)
 	if(FCVar_CurrentlyOpenEditBox~="")then
 		if ( button == "LeftButton" ) then
-			if ( IsShiftKeyDown() ) then
+			if ( IsShiftKeyDown() and not ignoreModifiers ) then
 				getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetInventoryItemLink("player", this:GetID()));
 			end
 		end
