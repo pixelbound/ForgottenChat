@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>ForgottenChat Documentation</title>
+<style type="text/css">
+<!--
+.style3 {
+	font-size: 24px;
+	color: #000066;
+}
+.style4 {
+	font-size: 12px;
+	color: #000000;
+}
+.style8 {font-size: large; font-weight: bold; }
+-->
+</style>
+</head>
+
+<body>
+<div align="center">
+  <p class="style3">ForgottenChat Frequently Asked Questions <br />
+    <span class="style4">The only stupid questions are the stupid ones. </span></p>
+  <hr />
+</div>
+<ol>
+  <li><a href="#FAQTabs">I believe Tabbed Widgets would make whispering easier. Are there any plans to implement tabs with ForgottenChat?</a></li>
+  <li><a href="#FAQFrameClosing">ForgottenChat closes standard World of Warcraft frames when a new conversation is started. How do I fix this? </a></li>
+  <li><a href="#FAQError">ForgottenChat is causing an error, what do I do?</a></li>
+  <li><a href="#FAQLinks">I cannot link from mod X, can you fix it? </a></li>
+  <li><a href="#FAQDownload">Where can I download the latest version of ForgottenChat? </a></li>
+  <li><a href="#FAQHiddenWhispers">ForgottenChat keeps picking up messages from other UI mods, can I hide these?</a></li>
+  <li><a href="#FAQLocation">ForgottenChat does not report the location along with the other /who information. </a></li>
+  <li><a href="#FAQNext">When is the next version of ForgottenChat going to be released? </a></li>
+</ol>
+<p>&nbsp;</p>
+<hr />
+<p align="justify"><span class="style8">I believe Tabbed Widgets would make whispering easier. Are there any plans to implement tabs with ForgottenChat?</span><a name="FAQTabs" id="FAQTabs"></a><br />
+While the suggestion of tabs is not a new one, the Dev Team will not be implementing tabs in the forseeable future. ForgottenChat was designed to consist of multiple and individual whisper widgets, and having tabs will obviously break this concept. Neither will it be an in game option due to the amount of coding required for something the developer has absolutly no desire to use. </p>
+<hr />
+<p align="justify"><span class="style8">ForgottenChat closes standard World of Warcraft frames when a new conversation is started. How do I fix this?</span> <a name="FAQFrameClosing" id="FAQFrameClosing"></a><br /> 
+  The closing of the Auction House, Mailbox, and other frames when a new message is received is an unfortunate side-effect caused by ForgottenChat doing a hidden /who of the person talking to you.  FC does this to fill in the /who field at the bottom of each widget with the appropriate information.  By setting the <a href="AboutFCSettings.html#IgnoreWho">Ignore Who</a> option. The performing of an automatic /who is streamlined as much as possible to prevent such an occurance but it still happens. </p>
+<hr />
+<p align="justify"><span class="style8">ForgottenChat is causing an error, what do I do?</span><a name="FAQError" id="FAQError"></a><br /> 
+  If ForgottenChat starts to complain and throw off errors, there are very few things that can be done by the average user to solve the problem.  An error message is best dealt with by the Dev Team, so follow the instructions on <a href="FCBugs.html">Bug Reporting</a>.  Make sure to follow the instructions as closely as possible since information is the most valuable tool in fixing these issues.</p>
+<hr />
+<p align="justify"><span class="style8">I cannot link from mod X, can you fix it?</span> <a name="FAQLinks" id="FAQLinks"></a><br />
+As much as the Dev Team would love to include support for other addons within  ForgottenChat, it simply is too great an undertaking for too little  return. There are literally hundreds of UI mods that have special  considerations regarding linking, and it is simply not worth the effort  to manage them all. Each UI mod fixed in this way requires a considerable amount of code and research which when compared to the number of users using Mod X and ForgottenChat is severly unbalanced. </p>
+<p>Some of the more popular UI mods are taken in for consideration such as <a href="http://www1.curse-gaming.com/mod.php?addid=117" target="_parent">AllInOneInventory</a> since it has more than 400,000 downloads as of February 5th, 2006.</p>
+<p>If you have an understanding of LUA programming, check out the tutorials page for instructions for setting up your own ItemLinks from other mods.</p>
+<hr />
+<p><span class="style8">Where can I download the latest version of ForgottenChat?</span><a name="FAQDownload" id="FAQDownload"></a><br />
+ForgottenChat is hosted by  <a href="http://www1.curse-gaming.com/mod.php?addid=2808" target="_parent">Curse-Gaming</a>, <a href="http://ui.worldofwar.net/ui.php?id=1686" target="_parent">WorldOfWar</a>, and <a href="http://www.wowinterface.com/downloads/fileinfo.php?id=4403" target="_parent">WoWInterface</a>. The latest  version of ForgottenChat can be found at any one of these sites.</p>
+<hr />
+<p align="justify"><strong class="style8">ForgottenChat keeps picking up messages from other UI mods, can I hide these? </strong><a name="FAQHiddenWhispers" id="FAQHiddenWhispers"></a><br />
+Mods such as CT_Raid use whispers to communicate between players and due to the method of catching whispers in ForgottenChat, they do not remain hidden. The Blacklist is the method of hiding whispers that follow a predictable pattern. <a href="http://www1.curse-gaming.com/mod.php?addid=1440" target="_parent">CallToArms</a> affixes the &quot;[CTA]&quot; tag in front of all their whispers, and <a href="http://www1.curse-gaming.com/mod.php?addid=1767" target="_parent">GuildAds</a> uses &quot;&lt;GA&quot;. By placing these entries in the <a href="AboutFCSettings.html#SectionBlacklist">blacklist</a>, ForgottenChat will automatically ignore them. </p>
+<hr />
+<p align="justify"><span class="style8">ForgottenChat does not report the location along with the other /who information.</span><a name="FAQLocation" id="FAQLocation"></a><br />
+Since ForgottenChat performs a single /who for every person talked to, it records all the information for later use to prevent un-necessary /who operations. In doing so, player location would become quickly out of date and need refreshed causing more traffic between the server and client as well as causing miscellanious WoW frames to close. It was decided that location is not important enough to warrant the extra time requirement and was replaced by ShiftClicking the widget titlebar. </p>
+<hr />
+<p><span class="style8">When is the next version of ForgottenChat going to be released?</span> <a name="FAQNext" id="FAQNext"></a><br />
+In the future. </p>
+<hr />
+<table width="100%" border="0">
+  <tr>
+    <td><div align="center"><strong>Notes:</strong></div></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>If your question is not in this FAQ, and there is nothing in the <a href="AboutFCSettings.html">settings</a> page to help you, <a href="FCBugs.html">contact me</a> and I will do my best to answer your questions. </li>
+    </ul></td>
+  </tr>
+</table>
+<p align="justify">&nbsp;</p>
+</body>
+</html>

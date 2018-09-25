@@ -1,0 +1,6 @@
+## Interface: 20003
+## Version: 3.2
+## Title: Forgotten's Chat System (Control Center)
+## Notes: MSN Emulator for the WoW environment
+## SavedVariables: ForgottenChat_General ForgottenChat_Aliases ForgottenChat_Blacklist
+ForgottenChatCC.xml

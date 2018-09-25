@@ -1,0 +1,7 @@
+## Interface: 20003
+## Version: 3.2
+## Title: Forgotten's Chat System (Log)
+## Notes: Logging plugin for ForgottenChat
+## SavedVariables: ForgottenChat_History
+## RequiredDeps: ForgottenChatCC
+ForgottenChatLog.xml

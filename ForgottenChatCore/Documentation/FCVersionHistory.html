@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>ForgottenChat Documentation</title>
+<style type="text/css">
+<!--
+.style3 {
+	font-size: 24px;
+	color: #000066;
+}
+.style4 {
+	font-size: 12px;
+	color: #000000;
+}
+.style5 {color: #0000FF}
+-->
+</style>
+</head>
+
+<body>
+<div align="center">
+  <p class="style3">ForgottenChat Version History <br />
+    <span class="style4">It aint THAT old is it? </span> </p>
+  <hr />
+</div>
+<p align="justify">Having a complete record of the history of ForgottenChat is simply something that HAPPENS. You dont question some things, and this is one of those things. (I do not know why exactly, but thats irrelevant). Below is a list in reverse-cronological order, the ways that ForgottenChat has Progressed since Version 1.0 Beta. </p>
+<table width="100%" border="0">
+  <tr>
+    <td><strong>Version 2.2.1 to 2.3 </strong></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>When sending a message with Shift+Enter, the message is sent, and the edit box remains open for more input </li>
+      <li>Widget Scaling now works as intended </li>
+      <li>Modified the Chat Hook to be more compatable with other mods</li>
+      <li>The setting &quot;Cascade Blacklist&quot; has been removed and defaulted to the ON stage. As a result, if a whisper is caught by the blacklist, it will appear on your default Chat Frame unless there is another UI mod that catches it. </li>
+      <li>Several new key bindings to be played with </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><strong>Version 2.2 to 2.2.1</strong></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Whisper histories are now saved per character</li>
+      <li>Fixed  the conversation histories. The widgets were showing the FIRST 20, not the last 20 whispers. </li>
+      <li>Histories can now be searched for a specific word/phrase </li>
+      <li>Several miscellanious bug fixes  </li>
+      <li>Updated for 1.10 </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><strong>Version 2.1 to 2.2 </strong></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Added a fix for the numerous ForgottenChat .nil errors
+        <ul>
+          <li>If you were having issues before, I recommend deleting your old saved variables </li>
+        </ul>
+      </li>
+      <li>The Channel frames can be scrolled to the bottom by using CTRL+MouseWheelDown</li>
+      <li>The /fc log page has been expanded, and conversation histories save between sessions
+        <ul>
+          <li>Widgets show the last 25 messages by default</li>
+          <li>Browse conversations by character    </li>
+        </ul>
+      </li>
+    </ul>    </td>
+  </tr>
+  <tr>
+    <td><strong>Version 2.0 to 2.1</strong></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Updated Readme file </li>
+      <li>Support provided for SCCN Mod </li>
+      <li>New option to enable ForgottenChat when talking with friends or guildies only. </li>
+      <li>Timestamps now appear in the Chat History. </li>
+      <li>ShiftClicking the Invite button will invite the participant to the users guild.</li>
+      <li>ShiftClicking the Ignore button will add the participant to the users friends list </li>
+      <li>AFK and DND message report to the ForgottenChat widgets. </li>
+      <li>Added a fix for Chatbox</li>
+      <li>Fixed an error that occured when the user disabled ForgottenChat </li>
+      <li>Fixed Channel Support Combat Minimize/Maximize </li>
+      <li>The Channel Support can now be toggled </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>Version 1.4 to 2.0 </strong></div></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Fixed a bug which will allow alphanumeric hotkeys to be used</li>
+      <li> Fixed a bug which caused a stack overflow error when clicking on a Paperdoll Item after disabling and re-enabling FC.</li>
+      <li>Items can now be linked from AllInOneInventory.</li>
+      <li>Added an option to pass Blacklisted whispers to the default blizzard chat frames.</li>
+      <li>Shift clicking on the Alias bar of the widget will perform a who of the specified person</li>
+      <li>A profile manager has been included to copy and paste profiles between characters.</li>
+      <li> Fixed a bug that prevented items being un-linkable when the widget is first opened</li>
+      <li>Channel Support!</li>
+      <li>6 new Whisper Widgets to play with.</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><strong>Version 1.3 to 1.4 </strong></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Audio alert when new message is diverted to a minimized widget.</li>
+      <li>Items can now be linked from the paper doll and the Bank in addition to inventory.</li>
+      <li>Fixed a bug that caused multiple whispers to appear.</li>
+      <li>When minimized widgets receive whispers, the number of Unread whispers is displayed beside the name on the widget.</li>
+      <li>Errors should no longer be thrown when starting a new conversation when in Battlegrounds.</li>
+      <li>Added a reply keybinding that brings up the edit box on the most recent conversation.</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><strong>Version 1.2 to 1.3 </strong></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Retrieving character info has been streamlined slightly.  ForgottenChat maintains info from old conversations in addition to  scanning the current /who for a match before performing its own search.</li>
+      <li>A Blacklist of phrases has been included which will automatically  ignore messages that Start with them. &quot;[CTA]&quot; will block all CallToArms  messages. &quot;&lt;GA&quot; will block all GuildAds messages &quot;fort &quot; will block  Whispercast Fortitude requests... however it may cause false positives</li>
+      <li>Item links can now be put into the edit boxes and sent in a whisper.</li>
+      <li>Timestamps are now in 24 hour time.</li>
+      <li>Slash commands are now passable in any of the</li>
+      <li>Widget EditBoxes.</li>
+      <li>Minimum Widget size has been removed</li>
+      <li>Now able to hide the Action Buttons</li>
+      <li>Who information retrieval can be disabled</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><strong>Version 1.1 to 1.2 </strong></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Enabled Timestamps</li>
+      <li>Expanded on the Conversation History</li>
+      <li>Text size can now be changed.</li>
+      <li>Added an 'Ignore' button to each widget</li>
+      <li>Changed the look of the EditBoxes</li>
+      <li>Provided support for non-english clients</li>
+      <li>Added /fc &lt;name&gt; to open new widgets</li>
+      <li>Provided a button to reset widget positions.</li>
+      <li>Included a readme.txt</li>
+      <li>Added /fc enable and /fc disable commands</li>
+      <li>Ignores messages with both &lt; and &gt; in them. This prevents the  showing of certain 'hidden' whispers. Special considerations made for  CallToArms and GuildAds whispers.</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><strong>Version 1.0 to 1.1</strong></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Replies and /r work as intended now</li>
+      <li>Added an 'Invite' and 'Inspect' button on the widgets</li>
+      <li>Fixed a bug with loosing EditBox focus randomly </li>
+    </ul></td>
+  </tr>
+</table>
+</body>
+</html>

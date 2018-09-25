@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>ForgottenChat Documentation</title>
+<style type="text/css">
+<!--
+.style3 {
+	font-size: 24px;
+	color: #000066;
+}
+.style4 {
+	font-size: 12px;
+	color: #000000;
+}
+.style5 {font-size: large}
+-->
+</style>
+</head>
+
+<body>
+<div align="center">
+  <p class="style3">ForgottenChat Configuration Details <br />
+    <span class="style4">You want it to do WHAT? </span></p>
+  <hr />
+</div>
+<p align="justify">All settings for ForgottenChat can be changed through the ForgottenChat Options menu (accessable by the /fc <a href="FCSlashCommands.html">slash command</a>) The manner in which these settings are saved and their definitions are explained here. </p>
+<table width="100%" border="0">
+  <tr>
+    <td><div align="center"><a href="#SectionBehavior">Behavior</a></div></td>
+    <td><div align="center"><a href="#SectionAppearance">Appearance</a></div></td>
+    <td><div align="center"><a href="#SectionAliases">Aliases</a></div></td>
+  </tr>
+  <tr>
+    <td><div align="center"><a href="#SectionBlacklist">Blacklist</a></div></td>
+    <td><div align="center"><a href="#SectionProfiles">Profile</a></div></td>
+    <td><div align="center"><a href="#SectionChannel">Channel</a></div></td>
+  </tr>
+</table>
+<p align="justify">&nbsp;</p>
+<p align="justify"><strong><span class="style5">Behavior Settings <a name="SectionBehavior" id="SectionBehavior"></a></span><br />
+</strong>These settings depict the way that the whisper widgets behave during run time. They are saved on a Per-Character Per-Server basis. &quot;<em>Euler</em> of Kel'Thuzad&quot; has a differant <a href="AboutFCProfiles.html">profile</a> than &quot;<em>Euler</em> of Aegwynn&quot; A description of individual Behavior Settings are explained below.</p>
+<table width="100%" border="0">
+  <tr>
+    <td width="50%"><div align="left"><strong>Load Minimized </strong></div></td>
+    <td width="50%"><em>Default: OFF </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">When this is enabled, newly created widgets will start up minimized </td>
+  </tr>
+  <tr>
+    <td><strong>Enable Flashing</strong> </td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">When a new message is received in a minimized widget, the title of the widget changes to the color defined by the <em>'Flashing' Effect </em>color. No actually flashing occurs.   </td>
+  </tr>
+  <tr>
+    <td><strong>Cycle Widgets </strong></td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">When all widgets are in use and a new conversation is initated, ForgottenChat will automatically close the oldest conversation to make room. If this is disabled, no new widget will be created, you will be allerted you missed the message, it will be placed in the ForgottenChat Log, and your <a href="#BusyMessage">Busy Message</a> is sent. </td>
+  </tr>
+  <tr>
+    <td><strong>Use Aliases <a name="UseAliases" id="UseAliases"></a></strong></td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Replaces the name of the person you are whispering with a name of your own choosing. </td>
+  </tr>
+  <tr>
+    <td><strong>Combat Hide </strong></td>
+    <td><em>Default: OFF </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">When entering combat, all widgets are hidden from view. When exiting combat, they all reappear. </td>
+  </tr>
+  <tr>
+    <td><strong>Combat Minimize </strong></td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">When entering combat, all unminimzed widgets are minimized. Upon exiting combat, only those that were automatically minimized are re-maximized. </td>
+  </tr>
+  <tr>
+    <td><strong>Click to Interact </strong></td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Enabling this will show the widget's edit box when it is clicked as opposed to showing on mouse over. </td>
+  </tr>
+  <tr>
+    <td><strong>Use Mouse Wheel </strong></td>
+    <td><em>Default: OFF </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Removes the scroll buttons on the widget and are replaced by the mouse's scroll wheel. </td>
+  </tr>
+  <tr>
+    <td><strong>Maximize Up </strong></td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">All widgets maximize up and minimize down instead of maximizing down and minimizing up. </td>
+  </tr>
+  <tr>
+    <td><strong>Show Timestamp </strong></td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Enables the time stamps on messages received when this option is set. </td>
+  </tr>
+  <tr>
+    <td><strong>Play Alert: </strong></td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">When a minimized widget receives a new whisper, an audible alert is sounded. Default sounds must be appropriatly configured. </td>
+  </tr>
+  <tr>
+    <td><strong>Timeout</strong></td>
+    <td><em>Default: 120 </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">This is the time in seconds after the last message is received from a widget before it is marked as inactive and is automatically closed. A check for inactive widgets is performed when a new target is selected and marked </td>
+  </tr>
+  <tr>
+    <td><strong>Max Widgets </strong></td>
+    <td><em>Default: 6 </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Sets the maximum number of widgets allowable on screen at any given time. 0 will prevent any incoming messages from being displayed. Maximum setting is 12. </td>
+  </tr>
+  <tr>
+    <td><strong>Busy Message <a name="BusyMessage" id="BusyMessage"></a></strong></td>
+    <td><em>Default: </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">This is the message that is sent when all widgets are in use. </td>
+  </tr>
+  <tr>
+    <td><strong>Selective Widgets </strong></td>
+    <td><em>Default</em>: <em>OFF</em> </td>
+  </tr>
+  <tr>
+    <td colspan="2">Enabling this option will only open a ForgottenChat widget for people within your guild, on your friends list, or on your alias list. Any other conversations will be directed to the default WoW Chat Frames. </td>
+  </tr>
+  <tr>
+    <td><strong>Save History </strong></td>
+    <td><em>Default</em>: <em>OFF</em> </td>
+  </tr>
+  <tr>
+    <td colspan="2">When this option is disabled, any old conversations that were in the SavedVariables will automatically be deleted upon login. If it is enabled, any and all old whisper conversations will remain in the Saved Variables indefinatly. NOTE: Leaving this enabled for a long period of time could use up valuble memory space! </td>
+  </tr>
+</table>
+<p align="justify"><strong> </strong></p>
+<p align="justify">&nbsp;</p>
+<hr />
+<p align="justify"><strong><span class="style5">Appearance Settings </span></strong><a name="SectionAppearance" id="SectionAppearance"></a><br />
+  These settings depict the way that the whisper widgets appear during run time. They are saved on a Per-Character Per-Server basis. &quot;<em>Euler</em> of Kel'Thuzad&quot; has a differant <a href="AboutFCProfiles.html">profile</a> than &quot;<em>Euler</em> of Aegwynn&quot; A description of individual Appearance Settings are explained below.</p>
+<table width="100%" border="0">
+  <tr>
+    <td width="50%"><div align="left"><strong>Widget Alpha Level </strong></div></td>
+    <td width="50%"><em>Default: 90% </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">This is the transparency level of all the whisper widgets' and channel widgets' background. Values between 0 and 100 (fully transparent to opaque respectivly) </td>
+  </tr>
+  <tr>
+    <td><strong>Height/Width</strong> </td>
+    <td><em>Default: 150/400 </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">The height and width of all whisper widgets. </td>
+  </tr>
+  <tr>
+    <td><strong>Text Size </strong></td>
+    <td><em>Default: 14 </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">The size of the text in both the whisper and channel widgets. </td>
+  </tr>
+  <tr>
+    <td><strong>Hide Buttons </strong></td>
+    <td><em>Default: OFF </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Hides the target, trade, invite, inspect and ignore buttons on the whisper widgets </td>
+  </tr>
+  <tr>
+    <td><strong>Ignore Who <a name="IgnoreWho" id="IgnoreWho"></a></strong></td>
+    <td><em>Default: OFF </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Enabling this will prevent ForgottenChat from forming a /who to determine race, class, level and guild to display on the bottom of the widget. Enable this if you are having issues with your own /whos. When an automatic /who is performed, the results are saved for the session to prevent repetative requests. Having this enabled will also prevent ForgottenChat from closing certain frames when a new conversation is started. (such as the Auction House or Mailbox) </td>
+  </tr>
+  <tr>
+    <td><strong>Count Unread </strong></td>
+    <td><em>Default: ON </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Adds a number beside the name or alias showing the number of unread messages that widget contains. Only appears on minimized widgets by definition. </td>
+  </tr>
+  <tr>
+    <td><strong>Widget Scale </strong></td>
+    <td><em>Default: 100% </em></td>
+  </tr>
+  <tr>
+    <td colspan="2">Use this slider to change the scale of the widget. Maxed at 200%, 25% minimum. Doubles, and quarters the size of the widget respectivly. </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<hr />
+<p align="justify"><strong><span class="style5">Aliases Settings </span></strong><a name="SectionAliases" id="SectionAliases"></a><br />
+  Aliases are nicknames that are associated with specific characters. If a conversation is started with someone on your alias list, their character name on the top of their widget will be replaced by their alias if <a href="#UseAliases">Use Aliases</a> is enabled.<br />
+  <br />
+These settings are saved on a Per-Server basis. &quot;<em>Euler</em> of Kel'Thuzad&quot; has a differant alias list than &quot;<em>Euler</em> of Aegwynn&quot;, but the same as &quot;<em>Bovi</em> of Kel'Thuzad&quot;</p>
+<p>&nbsp;</p>
+<hr />
+<p align="justify"><strong><span class="style5">Blacklist Settings </span></strong><a name="SectionBlacklist" id="SectionBlacklist"></a><br />
+Before a whisper is sent to it's appropriate widget, it is scanned by all the entries in the blacklist. If the whisper starts with any of the blacklisted phrases, it is ignored by ForgottenChat. This feature was included to bypass automated whispers from other UI mods in the World of Warcraft. Most of them start with a recognizable phrase. This is not all inclusive, but provides a modicum of protection.<br /> 
+<br />
+These settings are saved on a general basis. &quot;<em>Euler</em> of Kel'Thuzad&quot; has the same blacklist entry as &quot;<em>Bovi</em> of Aegwynn&quot;</p>
+<p align="justify">&nbsp;</p>
+<hr />
+<p align="justify"><strong><span class="style5">Profile Settings </span></strong><a name="SectionProfiles" id="SectionProfiles"></a><br />
+A profile is the collection of Appearance and Behavior settings associated with a specific character. Check <a href="AboutFCProfiles.html">here</a> for specifics. </p>
+<p align="justify">&nbsp;</p>
+<hr />
+<p align="justify"><strong><span class="style5">Channel Settings </span></strong><a name="SectionChannel" id="SectionChannel"></a><br />
+These settings record ForgottenChat channel widget behavior and to an extend, the appearance. They are stored on a Per-Character Per-Server basis. &quot;<em>Euler</em> of Kel'Thuzad&quot; has a differant setting than &quot;<em>Euler</em> of Aegwynn&quot; A description of individual Channel Settings are explained below. Each Channel widget can have distinct settings. </p>
+<table width="100%" border="0">
+  <tr>
+    <td width="50%"><div align="left"><strong>Widget Title </strong></div></td>
+    <td width="50%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">This is what you wish to call the widget. </td>
+  </tr>
+  <tr>
+    <td><strong>Combat Minimize </strong> </td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Automatically minimizes the widget when entering combat. </td>
+  </tr>
+  <tr>
+    <td><strong>Combat Maximize </strong></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Automatically maximizes the widget when entering combat </td>
+  </tr>
+  <tr>
+    <td><strong>Use This Widget </strong></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Simply shows or hides this widget. </td>
+  </tr>
+  <tr>
+    <td><strong>Disable Channel Support </strong></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">This feature was included to fix the compatability issues with other Chat based UI mods. This toggle has not been fully tested as of the latest release. After changing this feature, a /console reloadui may be required. </td>
+  </tr>
+</table>
+<p align="justify"><br />
+  <br />
+</p>
+</body>
+</html>

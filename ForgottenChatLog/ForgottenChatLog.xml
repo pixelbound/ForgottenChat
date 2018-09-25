@@ -1,0 +1,1556 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="ForgottenChatLog.lua"/>
+		<Scripts>
+			<OnLoad>
+			</OnLoad>
+			<OnEvent>
+			</OnEvent>
+        </Scripts>
+	<!--Virtual Frames-->
+	
+	<!--Commonly Used Frames -->
+	<Frame name="FCLLoader" toplevel="true" frameStrata="MEDIUM" movable="true" enableMouse="true" hidden="true" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				FCL_OnLoad()
+			</OnLoad>
+		</Scripts>	
+	</Frame>
+	
+	<Frame name="IMHistory" frameStrata="BACKGROUND" movable="true" enableMouse="true" hidden="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="400" y="500"/>
+		</Size>
+		<Anchors>
+			<Anchor point="RIGHT" relativeTo="UIParent" relativePoint="RIGHT"/>
+		</Anchors>
+		<Backdrop name="$parent_Backdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString Name="$parent_WhoField" inherits="GameFontNormal" text="All Incoming and Outgoing Whispers">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="20" y="8" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_CloseButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="17" y="17"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-10" y="-5"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up.tga"/>
+				<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down.tga"/>
+			</Button>
+			<ScrollingMessageFrame name="$parent_Chat" inherits="ChatFrameTemplate">
+				<Size>
+					<AbsDimension x="330" y="440"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-35" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Button name="$parent_ChatBottomButton">
+						<Size>
+							<AbsDimension x="32" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="32" y="-4"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="OVERLAY">
+								<Texture name="$parentFlash" file="Interface\ChatFrame\UI-ChatIcon-BlinkHilight" hidden="true"/>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnEnter>
+							</OnEnter>
+							<OnClick>
+								PlaySound("igChatBottom");
+								this:GetParent():ScrollToBottom();
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollEnd-Up"/>
+						<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollEnd-Down"/>
+						<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollEnd-Disabled"/>
+						<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+					</Button>
+					<Button name="$parent_ChatDownButton">
+						<Size>
+							<AbsDimension x="32" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOM" relativeTo="$parent_ChatBottomButton" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="0" y="-2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnEnter>
+							</OnEnter>
+							<OnLoad>
+							</OnLoad>
+							<OnUpdate>
+							</OnUpdate>
+							<OnClick>
+								PlaySound("igChatScrollDown");
+								this:GetParent():ScrollDown();
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up"/>
+						<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down"/>
+						<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled"/>
+						<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+					</Button>
+					<Button name="$parent_ChatUpButton">
+						<Size>
+							<AbsDimension x="32" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOM" relativeTo="$parent_ChatDownButton" relativePoint="TOP"/>
+						</Anchors>
+						<Scripts>
+						<OnEnter>
+							</OnEnter>
+							<OnLoad>
+								
+							</OnLoad>
+							<OnUpdate>
+								
+								
+							</OnUpdate>
+							<OnClick>
+								PlaySound("igChatScrollUp");
+								this:GetParent():ScrollUp();
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollUp-Up"/>
+						<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollUp-Down"/>
+						<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollUp-Disabled"/>
+						<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						this:SetFrameLevel(2)
+						IMHistory_Chat:Show()
+					</OnLoad>
+					<OnEvent>
+					</OnEvent>
+					<OnUpdate>
+						ChatFrame_OnUpdate(arg1);
+					</OnUpdate>
+					<OnHyperlinkClick>
+						ChatFrame_OnHyperlinkShow(arg1, arg2, arg3);
+					</OnHyperlinkClick>
+					<OnMouseWheel>
+						if ( tonumber(arg1) > 0 ) then
+							this:ScrollUp()
+						else
+							if(IsControlKeyDown())then
+								this:ScrollToBottom()
+							else
+								this:ScrollDown()
+							end
+						end
+					</OnMouseWheel> 
+				</Scripts>
+			</ScrollingMessageFrame>
+			<Button Name="$parent_MoveIt">
+				<Size>
+					<AbsDimension x="360" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Message History">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-8" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartMoving()
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing()
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+						
+			<Button name="$parent_ToggleHistorySort" inherits="OptionsButtonTemplate" text="&lt;">
+				<Size>
+					<AbsDimension x="20" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parent_MoveIt">
+						<Offset>
+						<AbsDimension x="-5" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>	
+						if(this:GetText()=="&lt;")then
+							IMHistoryList:Show()
+							FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+							this:SetText("&gt;")
+						else
+							IMHistoryList:Hide()
+							FCL_DisplayHistoryList("", 1)
+							this:SetText("&lt;")
+						end
+						
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parentList" frameStrata="ARTWORK" movable="false" hidden="true">
+				<Size>
+					<AbsDimension x="150" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" parent="$parent" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop name="$parent_Backdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="4" right="4" top="4" bottom="4"/>
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString Name="$parent_SortMethod" inherits="GameFontNormal" text="Character">
+							<Anchors>
+								<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-8" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>	
+					<Button name="$parent_ResetAll" inherits="OptionsButtonTemplate" text="Flush History">
+						<Size>
+							<AbsDimension x="125" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOM" relativePoint="BOTTOM" relativeTo="$parent">
+								<Offset>
+								<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if(this:GetText()=="Flush History")then
+									this:SetText("Confirmed!")
+								elseif(this:GetText()=="Confirmed!")then
+									this:SetText("Flush History")
+									ForgottenChat_History[FCCC_GetPlayerIndex()]={}
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r Whisper history flushed for "..UnitName("player").." of "..GetRealmName(), 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_ConvertToChatLoggerForm" inherits="OptionsButtonTemplate" text="&lt;CL&gt; Extract">
+						<Size>
+							<AbsDimension x="125" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOM" relativePoint="TOP" relativeTo="$parent_ResetAll">
+								<Offset>
+								<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								
+							</OnClick>
+							<OnLoad>
+								this:Disable()
+							</OnLoad>
+						</Scripts>
+					</Button>
+					<EditBox name="$parent_Search" autoFocus="false" frameStrata="HIGH" historyLines="0" numeric="false">
+						<Size>
+							<AbsDimension x="115" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOM" relativeTo="$parent_ConvertToChatLoggerForm" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT">
+											<Offset>
+												<AbsDimension x="-10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT">
+											<Offset>
+												<AbsDimension x="10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnShow>
+								this:ClearFocus();
+							</OnShow>
+							<OnLoad>
+								this:SetTextInsets(10,10,0,0)
+								this:SetText(" Search ")
+								this:SetTextColor(0.5,0.5,0.5)
+							</OnLoad>
+							<OnEnterPressed>
+								if(this:GetText()=="")then
+									this:SetText(" Search ")
+									this:SetTextColor(0.5,0.5,0.5)
+									this:ClearFocus()
+									FCVar_PlayerSearchFilterResults={}
+									FC_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FC_DisplayHistoryList("",1)
+								else
+									FCVar_PlayerSearchFilterResults={}
+									FC_DisplaySearchResults(this:GetText())
+								end
+							</OnEnterPressed>
+							<OnEscapePressed>
+								this:ClearFocus();
+								this:SetTextColor(0.5,0.5,0.5)
+								this:SetText(" Search ")
+								FCVar_PlayerSearchFilterResults={}
+								FC_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+							</OnEscapePressed>
+							<OnEnter>
+								if(this:GetText()==" Search ")then
+									this:SetText("")
+									this:SetTextColor(1,1,1)
+									this:SetFocus()
+								end
+							</OnEnter>
+							<OnLeave>
+								if(this:GetText()=="")then
+									this:SetText(" Search ")
+									FCVar_PlayerSearchFilterResults={}
+									this:SetTextColor(0.5,0.5,0.5)
+									this:ClearFocus()
+									FCVar_PlayerSearchFilterResults={}
+									FC_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FC_DisplayHistoryList("",1)
+								end
+							</OnLeave>
+							<OnClick>
+								if(this:GetText()==" Search ")then
+									this:SetText("")
+									this:SetTextColor(1,1,1)
+									this:SetFocus()
+								end
+							</OnClick>
+						</Scripts>
+						<FontString inherits="ChatFontNormal" bytes="256"/>
+					</EditBox>
+					
+					
+					<!--These are the actual entries in the list-->
+					<Slider name="$parent_Scroller" inherits="FCBlankVerticalSliderTemplate">
+						<Size>
+							<AbsDimension x="17" y="380"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="5" y="-20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(1,1)
+								this:SetValueStep(1)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(1)
+							</OnShow>
+							<OnValueChanged>
+								FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Button Name="$parent_Entry1" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="-25" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry2" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry1" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+						<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry3" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry2" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry4" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry3" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry5" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry4" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry6" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry5" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry7" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry6" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry8" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry7" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry9" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry8" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry10" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry9" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry11" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry10" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry12" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry11" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry13" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry12" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry14" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry13" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry15" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry14" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry16" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry15" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry17" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry16" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry18" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry17" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry19" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry18" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry20" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry19" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry21" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry20" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry22" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry21" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry23" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry22" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry24" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry23" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry25" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry24" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry26" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry25" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry27" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry26" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry28" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry27" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry29" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry28" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry30" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="125" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry29" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="8" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								if(IsControlKeyDown())then
+									ForgottenChat_History[FCCC_GetPlayerIndex()][this:GetText()]=nil
+									FCL_UpdateHistoryList(IMHistoryList_Scroller:GetValue())
+									FCL_DisplayHistoryList("",1)
+								else
+									FCL_DisplaySearchResults(IMHistoryList_Search:GetText(), getglobal(this:GetName().."_Text"):GetText())
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+				
+				</Frames>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				IMHistoryList_SortMethod:SetText(FCCC_GetPlayerIndex())
+			</OnLoad>
+			<OnShow>
+				IMHistoryList:Hide()
+				IMHistoryList_SortMethod:SetText(FCCC_GetPlayerIndex())
+				FCL_DisplayHistoryList("", 1)
+				IMHistory_ToggleHistorySort:SetText("&lt;")
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

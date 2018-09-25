@@ -1,0 +1,4818 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="ForgottenChatCC.lua"/>
+		<Scripts>
+			<OnLoad>
+			</OnLoad>
+			<OnEvent>
+			</OnEvent>
+        </Scripts>
+	<!--Virtual Frames-->
+	<CheckButton name="FCCheckTemplate" inherits="UICheckButtonTemplate" virtual="true">
+		<HitRectInsets>
+			<AbsInset left="0" right="0" top="0" bottom="0"/>
+		</HitRectInsets>
+		<Scripts>
+			<OnClick>
+				if ( this:GetChecked() ) then
+					PlaySound("igMainMenuOptionCheckBoxOff");
+				else
+					PlaySound("igMainMenuOptionCheckBoxOn");
+				end
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+	<Slider name="FCBlankSliderTemplate" orientation="HORIZONTAL" virtual="true" enableMouse="true" minValue="0" maxValue="100">
+		<Size>
+			<AbsDimension x="128" y="17"/>
+		</Size>
+		<HitRectInsets>
+			<AbsInset left="0" right="0" top="-10" bottom="-10"/>
+		</HitRectInsets>
+		<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="8"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="8"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="6" bottom="6"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentText" inherits="GameFontNormalSmall" text="">
+					<Anchors>
+						<Anchor point="BOTTOM" relativePoint="TOP"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentVal" inherits="GameFontHighlightSmall">
+					<Anchors>
+						<Anchor relativePoint="BOTTOM" point="TOP"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+			<Size>
+				<AbsDimension x="32" y="32"/>
+			</Size>
+		</ThumbTexture>
+	</Slider>
+	<Slider name="FCBlankVerticalSliderTemplate" orientation="VERTICAL" virtual="true" enableMouse="true" minValue="0" maxValue="100">
+		<Size>
+			<AbsDimension x="17" y="170"/>
+		</Size>
+		<HitRectInsets>
+			<AbsInset left="0" right="0" top="-10" bottom="-10"/>
+		</HitRectInsets>
+		<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="8"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="8"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="6" bottom="6"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentText" inherits="GameFontNormalSmall" text="">
+					<Anchors>
+						<Anchor point="BOTTOM" relativePoint="TOP"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentVal" inherits="GameFontHighlightSmall">
+					<Anchors>
+						<Anchor relativePoint="BOTTOM" point="TOP"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+			<Size>
+				<AbsDimension x="32" y="32"/>
+			</Size>
+		</ThumbTexture>
+	</Slider>
+	<Button name="FCButtonTemplate" virtual="true">
+		<NormalText name="$parentText" inherits="GameFontNormal"/>
+		<HighlightText inherits="GameFontHighlight"/>
+		<HighlightTexture inherits="UIPanelButtonHighlightTexture"/>
+	</Button>
+	
+	
+	
+	<Frame name="FCCC_Options" toplevel="true" frameStrata="MEDIUM" movable="true" enableMouse="true" hidden="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="380" y="345"/>
+		</Size>
+		<TitleRegion setAllPoints="true"/>
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />	
+				<Size>
+					<AbsDimension x="128" y="17" />
+				</Size>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_TitleArt" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="350" y="64" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString Name="$parent_TitleText" inherits="GameFontNormal" text="ForgottenChat">
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="" y="-2" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Tab1" inherits="OptionsButtonTemplate" text="Blacklist">
+				<Size>
+					<AbsDimension x="115" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset>
+						<AbsDimension x="16" y="-25" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_"..this:GetText().."_Panel"):Show()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Tab2" inherits="OptionsButtonTemplate" text="Aliases">
+				<Size>
+					<AbsDimension x="115" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Tab1">
+						<Offset>
+						<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_"..this:GetText().."_Panel"):Show()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Tab3" inherits="OptionsButtonTemplate" text="Profiles">
+				<Size>
+					<AbsDimension x="115" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parent_Tab2">
+						<Offset>
+						<AbsDimension x="1" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_"..this:GetText().."_Panel"):Show()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Tab4" inherits="OptionsButtonTemplate" text="Behavior">
+				<Size>
+					<AbsDimension x="115" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Tab1">
+						<Offset>
+						<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_"..this:GetText().."_Panel"):Show()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Tab5" inherits="OptionsButtonTemplate" text="Appearance">
+				<Size>
+					<AbsDimension x="115" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Tab2">
+						<Offset>
+						<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_"..this:GetText().."_Panel"):Show()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Tab6" inherits="OptionsButtonTemplate" text="History">
+				<Size>
+					<AbsDimension x="115" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Tab3">
+						<Offset>
+						<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_"..this:GetText().."_Panel"):Show()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Tab7" inherits="OptionsButtonTemplate" text="Channels">
+				<Size>
+					<AbsDimension x="115" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parent_Tab4">
+						<Offset>
+						<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_"..this:GetText().."_Panel"):Show()
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<Frame name="$parent_Blacklist_Panel" frameStrata="ARTWORK" movable="false" hidden="true">
+				<Size>
+					<AbsDimension x="360" y="255"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-80" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="11" right="12" top="12" bottom="11" />	
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<!--First Column-->
+						<FontString Name="FCGeneric5" inherits="GameFontNormal" text="Blacklist Phrases">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-12" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="FCDescript" inherits="GameFontNormal" text="Ignore messages starting:">
+							<Size>
+								<AbsDimension x="260" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="20" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button Name="$parent_AddButton" inherits="OptionsButtonTemplate">
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-15" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Add">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:ClearFocus()
+								if(FCCC_Options_Blacklist_Panel_EditBox:GetText()~="")then
+									FCCC_AddBlacklist(FCCC_Options_Blacklist_Panel_EditBox:GetText())
+									FCCC_UpdateBlacklist(FCCC_Options_Blacklist_Panel_Scroller:GetValue())
+									FCCC_Options_Blacklist_Panel_EditBox:SetText("")
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_DeleteButton" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOM" relativeTo="$parent_AddButton" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="" y="" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Delete">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:ClearFocus()
+								if(FCCC_Options_Blacklist_Panel_EditBox:GetText()~="")then
+									FCCC_RemoveBlacklist(FCCC_Options_Blacklist_Panel_EditBox:GetText())
+									FCCC_UpdateBlacklist(FCCC_Options_Blacklist_Panel_Scroller:GetValue())
+									FCCC_Options_Blacklist_Panel_EditBox:SetText("")
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<EditBox name="$parent_EditBox" autoFocus="false">
+						<Size>
+							<AbsDimension x="5" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="FCDescript" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="-5" y="-190"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="TOPRIGHT" relativeTo="FCDescript" relativePoint="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="5" y="-190"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture name="$parentLeft" file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="256" y="32"/>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT"/>
+									</Anchors>
+								</Texture>
+								<Texture name="$parentRight" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="16" y="32"/>
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT"/>
+									</Anchors>
+									<TexCoords left="0.9375" right="1.0" top="0" bottom="1.0"/>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="1" y="32"/>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+										<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="0" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.9375" top="0" bottom="1.0"/>
+								</Texture>
+							</Layer>
+							<Layer level="ARTWORK">
+								<FontString name="$parentHeader" inherits="ChatFontNormal">
+									<Anchors>
+										<Anchor point="LEFT">
+											<Offset>
+												<AbsDimension x="13" y="0"/>
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnShow>
+								this:ClearFocus();
+							</OnShow>
+							<OnLoad>
+								this:SetTextInsets(10,10,0,0)
+							</OnLoad>
+							<OnEnterPressed>
+								if(this:GetText()~="")then
+									FCCC_AddBlacklist(this:GetText())
+									FCCC_UpdateBlacklist(FCCC_Options_Blacklist_Panel_Scroller:GetValue())
+									this:SetText("")
+								end
+							</OnEnterPressed>
+							<OnEscapePressed>
+								this:ClearFocus();
+							</OnEscapePressed>
+							<OnTabPressed>
+								
+							</OnTabPressed>
+						</Scripts>
+						<FontString inherits="ChatFontNormal" bytes="256"/>
+					</EditBox>
+					
+					<Button Name="$parent_Entry1" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="5" y="-25" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry2" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry1" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #2">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry3" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry2" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #3">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry4" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry3" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #4">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry5" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry4" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #5">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry6" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry5" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #6">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry7" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry6" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #7">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry8" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry7" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #8">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry9" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry8" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #9">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry10" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry9" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #10">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry11" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry10" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #11">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry12" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="335" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry11" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Blacklist #12">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Blacklist_Panel_EditBox:SetText(getglobal(this:GetName().."_Text"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					
+					<Slider name="$parent_Scroller" inherits="FCBlankVerticalSliderTemplate">
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="FCCC_Options_Blacklist_Panel" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="-10" y="15"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(1,1)
+								this:SetValueStep(1)
+								this:Show()
+							</OnLoad>
+							<OnShow>
+								this:SetValue(1)
+							</OnShow>
+							<OnValueChanged>
+								FCCC_UpdateBlacklist(this:GetValue())
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					
+				</Frames>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetParent():GetName().."_Appearance_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Aliases_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Profiles_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Behavior_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_History_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Channels_Panel"):Hide()
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_Appearance_Panel" frameStrata="ARTWORK" movable="false" hidden="true">
+				<Size>
+					<AbsDimension x="360" y="255"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-80" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="11" right="12" top="12" bottom="11" />	
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString Name="FCGeneric2" inherits="GameFontNormal" text="Widget Appearance">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-12" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Transparency" inherits="GameFontNormal" text="Transparency:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="30" y="-25" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_TransparencyNum" inherits="GameFontNormal" text="100">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_Transparency" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_FontSize" inherits="GameFontNormal" text="Text Size:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_Transparency" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_FontSizeNum" inherits="GameFontNormal" text="14">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_FontSize" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_WidgetScale" inherits="GameFontNormal" text="Widget Scale:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_FontSize" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>	
+						<FontString Name="$parent_Label_WidgetScaleNum" inherits="GameFontNormal" text="100">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_WidgetScale" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Height" inherits="GameFontNormal" text="Height">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_WidgetScale" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_HeightNum" inherits="GameFontNormal" text="100">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_Height" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Width" inherits="GameFontNormal" text="Width">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_Height" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_WidthNum" inherits="GameFontNormal" text="100">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_Width" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Scrollbuttons" inherits="GameFontNormal" text="Scroll Buttons">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_Width" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Actionbuttons" inherits="GameFontNormal" text="Action Buttons">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_Scrollbuttons" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						
+						<FontString Name="FCGeneric4" inherits="GameFontNormal" text="Colors:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="190" y="-25" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Slider name="$parent_Transparency_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_Transparency" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(0,100)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(FCCC_GetVariable("Transparency")*100)
+								FCCC_Options_Appearance_Panel_Label_TransparencyNum:SetText(this:GetValue())
+							</OnShow>
+							<OnValueChanged>
+								FCCC_SetVariable("Transparency",this:GetValue()/100)
+								FCCC_Options_Appearance_Panel_Label_TransparencyNum:SetText(math.floor(this:GetValue()))
+								FC_SetTransparent()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Slider name="$parent_FontSize_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_FontSize" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(10,30)
+								this:SetValueStep(1)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(FCCC_GetVariable("FontSize"))
+								FCCC_Options_Appearance_Panel_Label_FontSizeNum:SetText(this:GetValue())
+							</OnShow>
+							<OnValueChanged>
+								FCCC_SetVariable("FontSize",this:GetValue())
+								FCCC_Options_Appearance_Panel_Label_FontSizeNum:SetText(math.floor(this:GetValue()))
+								FC_SetFontSize()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Slider name="$parent_WidgetScale_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_WidgetScale" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(.25,2.00)
+								this:SetMinMaxValues(1,1)	<!--to temporarily disable the slider-->
+								this:SetValueStep(0.05)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(FCCC_GetVariable("WidgetScale"))
+								FCCC_Options_Appearance_Panel_Label_WidgetScaleNum:SetText(math.floor(this:GetValue()*100)/100)
+								FCCC_Options_Appearance_Panel_Label_WidgetScale:SetTextColor(1,0,0)
+							</OnShow>
+							<OnValueChanged>
+								FCCC_SetVariable("WidgetScale",this:GetValue())
+								FCCC_Options_Appearance_Panel_Label_WidgetScaleNum:SetText(math.floor(this:GetValue()*100)/100)
+								FC_SetWidgetScale()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Slider name="$parent_Height_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_Height" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(100,500)
+								
+								this:SetValueStep(5)
+							</OnLoad>
+							<OnShow>
+								H,W=FCCC_ParseDimension(FCCC_GetVariable("COREdimension"))
+								this:SetValue(H)
+								FCCC_Options_Appearance_Panel_Label_HeightNum:SetText(H)
+							</OnShow>
+							<OnValueChanged>
+								H,W=FCCC_ParseDimension(FCCC_GetVariable("COREdimension"))
+								FCCC_SetVariable("COREdimension",W.."x"..this:GetValue())
+								FCCC_Options_Appearance_Panel_Label_HeightNum:SetText(this:GetValue())
+								FC_ResizeWidget()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Slider name="$parent_Width_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_Width" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(100,500)
+								this:SetValueStep(5)
+							</OnLoad>
+							<OnShow>
+								H,W=FCCC_ParseDimension(FCCC_GetVariable("COREdimension"))
+								this:SetValue(W)
+								FCCC_Options_Appearance_Panel_Label_WidthNum:SetText(W)
+							</OnShow>
+							<OnValueChanged>
+								H,W=FCCC_ParseDimension(FCCC_GetVariable("COREdimension"))
+								FCCC_SetVariable("COREdimension",this:GetValue().."x"..H)
+								FCCC_Options_Appearance_Panel_Label_WidthNum:SetText(this:GetValue())
+								FC_ResizeWidget()
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<CheckButton name="$parent_ScrollButtons_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_Scrollbuttons" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="100" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("ScrollButtons", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("ScrollButtons"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Enables/Disables the Scroll Buttons", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_ActionButtons_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_Actionbuttons" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="100" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("ActionButtons", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("ActionButtons"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Enables/Disables the Action Buttons", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					
+					
+					<EditBox name="$parent_Height_Input" autoFocus="false" frameStrata="HIGH" historyLines="32" letters="4" numeric="true">
+						<Size>
+							<AbsDimension x="75" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="FCHeight" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="60" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT">
+											<Offset>
+												<AbsDimension x="-10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT">
+											<Offset>
+												<AbsDimension x="10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnShow>
+								this:ClearFocus();
+							</OnShow>
+							<OnLoad>
+								this:SetTextInsets(10,10,0,0)
+							</OnLoad>
+							<OnEnterPressed>
+								test=tonumber(this:GetText())
+								if(test>0)then
+									FC_ToggleOption("Height",test)
+									this:ClearFocus();
+								end
+							</OnEnterPressed>
+							<OnEscapePressed>
+								this:ClearFocus();
+							</OnEscapePressed>
+						</Scripts>
+						<FontString inherits="ChatFontNormal" bytes="256"/>
+					</EditBox>
+					<EditBox name="$parent_Width_Input" autoFocus="false" frameStrata="HIGH" historyLines="32" letters="4" numeric="true">
+						<Size>
+							<AbsDimension x="75" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="FCWidth" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="60" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT">
+											<Offset>
+												<AbsDimension x="-10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT">
+											<Offset>
+												<AbsDimension x="10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnShow>
+								this:ClearFocus();
+							</OnShow>
+							<OnLoad>
+								this:SetTextInsets(10,10,0,0)
+							</OnLoad>
+							<OnEnterPressed>
+								test=tonumber(this:GetText())
+								if(test>0)then
+									FC_ToggleOption("Width",test)
+									this:ClearFocus();
+								end
+							</OnEnterPressed>
+							<OnEscapePressed>
+								this:ClearFocus();
+							</OnEscapePressed>
+						</Scripts>
+						<FontString inherits="ChatFontNormal" bytes="256"/>
+					</EditBox>
+					<Button Name="$parent_InboundColor_Chooser" >
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="240" y="-35" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Incoming Text">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="" y="" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCVar_ColorChanging="InboundColor"
+								ColorPickerFrame:Show()
+								ColorPickerFrame:SetColorRGB(FCCC_ParseColor(FCCC_GetVariable(FCVar_ColorChanging)))
+								ColorPickerFrame.func = FCCC_ColorPicked
+							</OnClick>
+							<OnShow>
+								getglobal("FCCC_Options_Appearance_Panel_InboundColor_Chooser_Text"):SetTextColor(FCCC_ParseColor(FCCC_GetVariable("InboundColor")))
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_OutboundColor_Chooser" >
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_InboundColor_Chooser" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Outgoing Text">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="" y="" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCVar_ColorChanging="OutboundColor"
+								ColorPickerFrame:Show()
+								ColorPickerFrame:SetColorRGB(FCCC_ParseColor(FCCC_GetVariable(FCVar_ColorChanging)))
+								ColorPickerFrame.func = FCCC_ColorPicked
+							</OnClick>
+							<OnShow>
+								getglobal("FCCC_Options_Appearance_Panel_OutboundColor_Chooser_Text"):SetTextColor(FCCC_ParseColor(FCCC_GetVariable("OutboundColor")))
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_PulseColor_Chooser" >
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_OutboundColor_Chooser" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Pulse Effect">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="" y="" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCVar_ColorChanging="PulseColor"
+								ColorPickerFrame:Show()
+								ColorPickerFrame:SetColorRGB(FCCC_ParseColor(FCCC_GetVariable(FCVar_ColorChanging)))
+								ColorPickerFrame.func = FCCC_ColorPicked
+							</OnClick>
+							<OnShow>
+								getglobal("FCCC_Options_Appearance_Panel_PulseColor_Chooser_Text"):SetTextColor(FCCC_ParseColor(FCCC_GetVariable("PulseColor")))
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_NameColor_Chooser" >
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_PulseColor_Chooser" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Player Name">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="" y="" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCVar_ColorChanging="NameColor"
+								ColorPickerFrame:Show()
+								ColorPickerFrame:SetColorRGB(FCCC_ParseColor(FCCC_GetVariable(FCVar_ColorChanging)))
+								ColorPickerFrame.func = FCCC_ColorPicked
+							</OnClick>
+							<OnShow>
+								getglobal("FCCC_Options_Appearance_Panel_NameColor_Chooser_Text"):SetTextColor(FCCC_ParseColor(FCCC_GetVariable("NameColor")))
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_DetailColor_Chooser" >
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_NameColor_Chooser" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Player Information">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="" y="" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCVar_ColorChanging="DetailColor"
+								ColorPickerFrame:Show()
+								ColorPickerFrame:SetColorRGB(FCCC_ParseColor(FCCC_GetVariable(FCVar_ColorChanging)))
+								ColorPickerFrame.func = FCCC_ColorPicked
+							</OnClick>
+							<OnShow>
+								getglobal("FCCC_Options_Appearance_Panel_DetailColor_Chooser_Text"):SetTextColor(FCCC_ParseColor(FCCC_GetVariable("DetailColor")))
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_HistoryColor_Chooser" >
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_DetailColor_Chooser" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Conversation History">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="" y="" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCVar_ColorChanging="HistoryColor"
+								ColorPickerFrame:Show()
+								ColorPickerFrame:SetColorRGB(FCCC_ParseColor(FCCC_GetVariable(FCVar_ColorChanging)))
+								ColorPickerFrame.func = FCCC_ColorPicked
+							</OnClick>
+							<OnShow>
+								getglobal("FCCC_Options_Appearance_Panel_HistoryColor_Chooser_Text"):SetTextColor(FCCC_ParseColor(FCCC_GetVariable("HistoryColor")))
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_AFKColor_Chooser" >
+						<Size>
+							<AbsDimension x="60" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_HistoryColor_Chooser" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="AFK Notification">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="" y="" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCVar_ColorChanging="AFKColor"
+								ColorPickerFrame:Show()
+								ColorPickerFrame:SetColorRGB(FCCC_ParseColor(FCCC_GetVariable(FCVar_ColorChanging)))
+								ColorPickerFrame.func = FCCC_ColorPicked
+							</OnClick>
+							<OnShow>
+								getglobal("FCCC_Options_Appearance_Panel_AFKColor_Chooser_Text"):SetTextColor(FCCC_ParseColor(FCCC_GetVariable("AFKColor")))
+							</OnShow>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetParent():GetName().."_Blacklist_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Aliases_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Profiles_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Behavior_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_History_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Channels_Panel"):Hide()
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_Aliases_Panel" frameStrata="ARTWORK" movable="false" hidden="true">
+				<Size>
+					<AbsDimension x="360" y="255"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-80" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="11" right="12" top="12" bottom="11" />	
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString Name="FCGeneric3" inherits="GameFontNormal" text="Alias List">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-12" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Alias" inherits="GameFontNormal" text="Alias">
+							<Anchors>
+								<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="5" y="-15" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Character" inherits="GameFontNormal" text="Character">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="20" y="-15" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button Name="$parent_Entry1" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="-25" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry1_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry1" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry1_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry2" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry1" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry2_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry2" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry2_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry3" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry2" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry3_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry3" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry3_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry4" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry3" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry4_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry4" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry4_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry5" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry4" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry5_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry5" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry5_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry6" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry5" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry6_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry6" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry6_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry7" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry6" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry7_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry7" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry7_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry8" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry7" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry8_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry8" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry8_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry9" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry8" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry9_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry9" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry9_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry10" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry9" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry10_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry10" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry10_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry11" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry10" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry11_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry11" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry11_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					<Button Name="$parent_Entry12" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry11" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Character" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+								<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent_Character" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="150" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=1
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText(getglobal(this:GetName().."_Alias"):GetText())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText(getglobal(this:GetName().."_Character"):GetText())
+							</OnClick>
+							<OnMouseWheel>
+								scroller=getglobal(this:GetParent():GetName().."_Scroller")
+								if ( tonumber(arg1) > 0 ) then
+									scroller:SetValue(scroller:GetValue()-1)
+								else
+									scroller:SetValue(scroller:GetValue()+1)
+								end
+							</OnMouseWheel> 
+						</Scripts>
+					</Button>
+					<Button name="$parent_Entry12_DeleteButton" inherits="UIPanelCloseButton">
+						<Size>
+							<AbsDimension x="12" y="12"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Entry12" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-5" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								FCCC_RemoveAliasFromList(FCCC_Options_Aliases_Panel_Entry12_Character:GetText(Name))
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up"/>
+						<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down"/>
+					</Button>
+					
+					<Button Name="$parent_AddButton" inherits="OptionsButtonTemplate">
+						<Size>
+							<AbsDimension x="75" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-15" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Add">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AliasEditBox:ClearFocus()
+								FCCC_Options_Aliases_Panel_CharacterEditBox:ClearFocus()
+								if(FCCC_Options_Aliases_Panel_AliasEditBox:GetText()=="")then
+									FCCC_Options_Aliases_Panel_AliasEditBox:SetText("[Nameless]")
+								end
+								FCCC_SetAlias(FCCC_Options_Aliases_Panel_CharacterEditBox:GetText(),FCCC_Options_Aliases_Panel_AliasEditBox:GetText())
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText("")
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText("")
+								this.ButtonChanging=0
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_ClearButton" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="75" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOM" relativeTo="$parent_AddButton" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="" y="" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Clear">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Aliases_Panel_AliasEditBox:ClearFocus()
+								FCCC_Options_Aliases_Panel_CharacterEditBox:ClearFocus()
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText("")
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetText("")
+								this.ButtonChanging=0
+							</OnClick>
+						</Scripts>
+					</Button>
+					<EditBox name="$parent_AliasEditBox" autoFocus="false" frameStrata="HIGH">
+						<Size>
+							<AbsDimension x="120" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="$parent_AddButton" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-10" y="5"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT">
+											<Offset>
+												<AbsDimension x="-10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT">
+											<Offset>
+												<AbsDimension x="10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnShow>
+								this:ClearFocus();
+							</OnShow>
+							<OnLoad>
+								this:SetTextInsets(10,10,0,0)
+							</OnLoad>
+							<OnEnterPressed>
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetFocus()
+								if(this:GetText()=="")then
+									this:SetText("[Nameless]")
+								end
+								FCCC_SetAlias(FCCC_Options_Aliases_Panel_CharacterEditBox:GetText(),this:GetText())
+								FCCC_UpdateAliasList(FCCC_Options_Aliases_Panel_Scroller:GetValue())
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetText("")
+								this:SetText("")
+								FCCC_Options_Aliases_Panel_AddButton.ButtonChanging=0
+							</OnEnterPressed>
+							<OnEscapePressed>
+								this:ClearFocus();
+							</OnEscapePressed>
+							<OnTabPressed>
+								FCCC_Options_Aliases_Panel_CharacterEditBox:SetFocus()
+							</OnTabPressed>
+						</Scripts>
+						<FontString inherits="ChatFontNormal" bytes="256"/>
+					</EditBox>
+					<EditBox name="$parent_CharacterEditBox" autoFocus="false" frameStrata="HIGH">
+						<Size>
+							<AbsDimension x="110" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="$parent_AliasEditBox" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-7" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT">
+											<Offset>
+												<AbsDimension x="-10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT">
+											<Offset>
+												<AbsDimension x="10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnShow>
+								this:ClearFocus();
+							</OnShow>
+							<OnLoad>
+								this:SetTextInsets(10,10,0,0)
+							</OnLoad>
+							<OnEnterPressed>
+								this:ClearFocus();
+							</OnEnterPressed>
+							<OnEscapePressed>
+								this:ClearFocus();
+							</OnEscapePressed>
+							<OnTabPressed>
+								FCCC_Options_Aliases_Panel_AliasEditBox:SetFocus()
+							</OnTabPressed>
+						</Scripts>
+						<FontString inherits="ChatFontNormal" bytes="256"/>
+					</EditBox>
+					<Slider name="$parent_Scroller" inherits="FCBlankVerticalSliderTemplate">
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="-10" y="15"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(1,1)
+								this:SetValueStep(1)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(1)
+							</OnShow>
+							<OnValueChanged>
+								FCCC_UpdateAliasList(this:GetValue())
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					
+				
+				</Frames>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetParent():GetName().."_Blacklist_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Appearance_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Profiles_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Behavior_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_History_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Channels_Panel"):Hide()
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_Profiles_Panel" frameStrata="ARTWORK" movable="false" hidden="true">
+				<Size>
+					<AbsDimension x="360" y="255"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-80" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="11" right="12" top="12" bottom="11" />	
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<!--First Column-->
+						<FontString Name="FCGeneric6" inherits="GameFontNormal" text="Profiles">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-12" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Instruction" inherits="GameFontNormal" text="Select a Profile:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="20" y="-15" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_Detail" inherits="GameFontNormal" text="">
+							<Anchors>
+								<Anchor point="BOTTOM" relativeTo="$parent" relativePoint="BOTTOM">
+									<Offset>
+										<AbsDimension x="0" y="35" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_ProfileCopied" inherits="GameFontNormal" text="">
+							<Anchors>
+								<Anchor point="BOTTOM" relativeTo="$parent_Label_Detail" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button Name="$parent_Entry1" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="-25" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry2" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry1" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 2">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry3" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry2" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 3">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry4" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry3" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 4">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry5" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry4" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 5">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry6" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry5" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 6">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry7" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry6" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 7">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry8" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry7" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 8">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry9" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry8" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 9">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_Entry10" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="$parent_Entry9" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Text" inherits="GameFontNormal" text="Profile 10">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnClick>
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=this.profile
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText(this.stringName)
+								FCCC_Options_Profiles_Panel_CopyButton:Enable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					
+					
+					<Slider name="$parent_Scroller" inherits="FCBlankVerticalSliderTemplate">
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="-10" y="15"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(1,1)
+								this:SetValueStep(1)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(1)
+							</OnShow>
+							<OnValueChanged>
+								FCCC_UpdateProfileList(this:GetValue())
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Button Name="$parent_ExplodeButton" inherits="OptionsButtonTemplate">
+						<Size>
+							<AbsDimension x="75" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Paste All">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								this:Disable()
+							</OnLoad>
+							<OnClick>
+								for index, entry in pairs(ForgottenChat_General) do
+									FCCC_PasteProfile(index)
+								end
+								DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r Pasting profile '"..FCCC_Options_Profiles_Panel_Label_ProfileCopied.profile.."' over all Profiles", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_DeleteButton" inherits="OptionsButtonTemplate">
+						<Size>
+							<AbsDimension x="75" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_ExplodeButton" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="DELETE">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								this:Disable()
+							</OnLoad>
+							<OnClick>
+								if(FCCC_Options_Profiles_Panel_Label_Detail.profile==FCCC_GetPlayerIndex())then
+									DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r You cannot delete your currently active Profile", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
+									return
+								end
+								FCCC_DeleteProfile(FCCC_Options_Profiles_Panel_Label_Detail.profile)
+								DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r Deleting Profile '"..FCCC_Options_Profiles_Panel_Label_Detail.profile.."'.", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
+								FCCC_Options_Profiles_Panel_Label_Detail.profile=""
+								FCCC_Options_Profiles_Panel_Label_Detail:SetText("")
+								FCCC_Options_Profiles_Panel_Label_Detail.stringName=""
+								FCCC_Options_Profiles_Panel_CopyButton:Disable()
+								FCCC_Options_Profiles_Panel_DeleteButton:Disable()
+								FCCC_UpdateProfileList(FCCC_Options_Profiles_Panel_Scroller:GetValue())
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_PasteButton" inherits="OptionsButtonTemplate">
+						<Size>
+							<AbsDimension x="75" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="10" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Paste">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								this:Disable()
+							</OnLoad>
+							<OnClick>
+								if(FCCC_Options_Profiles_Panel_Label_ProfileCopied.profile~="")then
+									FCCC_PasteProfile(FCCC_Options_Profiles_Panel_Label_Detail.profile)
+									DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r Pasting profile '"..FCCC_Options_Profiles_Panel_Label_ProfileCopied.profile.."' over Profile '"..FCCC_Options_Profiles_Panel_Label_Detail.profile.."'.", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="$parent_CopyButton" inherits="OptionsButtonTemplate">
+						<Size>
+							<AbsDimension x="75" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="$parent_PasteButton" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="0" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Copy">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								this:Disable()
+							</OnLoad>
+							<OnClick>
+								text="Copied profile:   '"..FCCC_Options_Profiles_Panel_Label_Detail:GetText().."'"
+								FCCC_Options_Profiles_Panel_Label_ProfileCopied:SetText(text)
+								FCCC_Options_Profiles_Panel_Label_ProfileCopied.profile=FCCC_Options_Profiles_Panel_Label_Detail.profile
+								FCCC_CopyProfile(FCCC_Options_Profiles_Panel_Label_Detail.profile)
+								FCCC_Options_Profiles_Panel_ExplodeButton:Enable()
+								FCCC_Options_Profiles_Panel_PasteButton:Enable()
+							</OnClick>
+						</Scripts>
+					</Button>
+					
+				</Frames>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetParent():GetName().."_Appearance_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Aliases_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Blacklist_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Behavior_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_History_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Channels_Panel"):Hide()
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_Behavior_Panel" frameStrata="ARTWORK" movable="false" hidden="false">
+				<Size>
+					<AbsDimension x="360" y="255"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-80" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="11" right="12" top="12" bottom="11" />	
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<!--First Column-->
+						<FontString Name="FCGeneric1" inherits="GameFontNormal" text="Widget Behavior">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-12" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_LoadMinimized" inherits="GameFontNormal" text="Load Minimized">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="20" y="-30" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_CombatHide" inherits="GameFontNormal" text="Combat: Hide">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_LoadMinimized" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_CombatMinimize" inherits="GameFontNormal" text="Combat: Minimize">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_CombatHide" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_SelectiveWidgets" inherits="GameFontNormal" text="Selective Widgets">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_CombatMinimize" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_EditOnClick" inherits="GameFontNormal" text="Click to Interact">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_SelectiveWidgets" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_MinimizeUp" inherits="GameFontNormal" text="Maximize Up">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_EditOnClick" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_TimeStamp" inherits="GameFontNormal" text="Show Timestamp">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_MinimizeUp" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_AudibleAlert" inherits="GameFontNormal" text="Play Alert">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_TimeStamp" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_IgnoreWhos" inherits="GameFontNormal" text="Ignore /Who">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_AudibleAlert" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString Name="$parent_Label_MaxFrames" inherits="GameFontNormal" text="Max Widgets:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="200" y="-30" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_MaxFramesNum" inherits="GameFontNormal" text="12">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_MaxFrames" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_TimeoutSeconds" inherits="GameFontNormal" text="Timeout (sec):">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_MaxFrames" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_TimeoutSecondsNum" inherits="GameFontNormal" text="120">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_TimeoutSeconds" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_LevelThreshold" inherits="GameFontNormal" text="Level Threshold:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_TimeoutSeconds" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_LevelThresholdNum" inherits="GameFontNormal" text="70">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_LevelThreshold" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_UseAnchor" inherits="GameFontNormal" text="Anchor:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_LevelThreshold" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_UseAnchorNum" inherits="GameFontNormal" text="OFF">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_UseAnchor" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_LockAnchor" inherits="GameFontNormal" text="Lock Anchor">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_UseAnchor" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-20" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_HideAnchor" inherits="GameFontNormal" text="Hide Anchor">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_LockAnchor" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<CheckButton name="$parent_LoadMinimized_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_LoadMinimized" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("LoadMinimized", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("LoadMinimized"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("New frames open Minimized", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_CombatHide_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_CombatHide" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("CombatHide", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("CombatHide"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Hides all open Widgets upon entering combat.", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_CombatMinimize_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_CombatMinimize" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("CombatMinimize", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("CombatMinimize"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Minimizes all open Widgets upon entering combat.", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_SelectiveWidgets_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_SelectiveWidgets" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("SelectiveWidgets", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("SelectiveWidgets"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Only enabled for Guildies, Friends and people with Aliases.", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_EditOnClick_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_EditOnClick" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("EditOnClick", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("EditOnClick"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Setting this opens the Input Box when the frame is clicked.", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_MinimizeUp_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_MinimizeUp" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("MinimizeUp", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("MinimizeUp"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Maximizes the widget upwards, as opposed to down.", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_TimeStamp_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_TimeStamp" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("TimeStamp", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("TimeStamp"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Enables timestamps", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_AudibleAlert_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_AudibleAlert" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("AudibleAlert", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("AudibleAlert"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Minimized Widgets play a sound when a new whisper is received.", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_IgnoreWho_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_IgnoreWhos" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("IgnoreWhos", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("IgnoreWhos"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("if enabled, does not attempt to gather /who information", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_LockAnchor_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_LockAnchor" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="100" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("LockAnchor", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("LockAnchor"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Prevents the anchor frame from being moved", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_HideAnchor_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_HideAnchor" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="100" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("HideAnchor", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("HideAnchor"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("if enabled, hides the anchor while it is enabled", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<Slider name="$parent_MaxFrames_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_MaxFrames" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(0,12)
+								this:SetValueStep(1)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(FCCC_GetVariable("MAXwidgets"))
+							</OnShow>
+							<OnValueChanged>
+								FCCC_Options_Behavior_Panel_Label_MaxFramesNum:SetText(this:GetValue())
+								FCCC_SetVariable("MAXwidgets",this:GetValue())
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Slider name="$parent_TimeoutSeconds_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_TimeoutSeconds" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(0,600)
+								this:SetValueStep(10)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(FCCC_GetVariable("TimeoutSeconds"))
+							</OnShow>
+							<OnValueChanged>
+								FCCC_Options_Behavior_Panel_Label_TimeoutSecondsNum:SetText(this:GetValue())
+								FCCC_SetVariable("TimeoutSeconds",this:GetValue())
+							</OnValueChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Seconds before unused widgets are closed automatically\nMinimizing widgets will pause the timer.\nSetting to zero will disable", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</Slider>
+					<Slider name="$parent_LevelThreshold_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_LevelThreshold" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(0,70)
+								this:SetValueStep(1)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(FCCC_GetVariable("LevelThreshold"))
+							</OnShow>
+							<OnValueChanged>
+								FCCC_Options_Behavior_Panel_Label_LevelThresholdNum:SetText(this:GetValue())
+								FCCC_SetVariable("LevelThreshold",this:GetValue())
+							</OnValueChanged>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Automatically closes widgets of people\nequal to or below this level.\nFriends, Guildies and Aliases not filtered  \nIgnore /Who must be unchecked!", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</Slider>
+					<Slider name="$parent_UseAnchor_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_UseAnchor" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(0,2)
+								this:SetValueStep(1)
+							</OnLoad>
+							<OnShow>
+								State=FCCC_GetVariable("UseAnchor")
+								if(State=="OFF")then
+									this:SetValue(0)
+								elseif(State=="UP")then
+									this:SetValue(1)
+								elseif(State=="DOWN")then
+									this:SetValue(2)
+								end
+							</OnShow>
+							<OnValueChanged>
+								State=this:GetValue()
+								if(State==0)then
+									FCCC_SetVariable("UseAnchor","OFF")
+									FCCC_Options_Behavior_Panel_Label_UseAnchorNum:SetText("OFF")
+								elseif(State==1)then
+									FCCC_SetVariable("UseAnchor","UP")
+									FCCC_Options_Behavior_Panel_Label_UseAnchorNum:SetText("UP")
+								elseif(State==2)then
+									FCCC_SetVariable("UseAnchor","DOWN")
+									FCCC_Options_Behavior_Panel_Label_UseAnchorNum:SetText("DOWN")
+								end
+								FC_AnchorCascade()
+							</OnValueChanged>
+							<OnEnter>
+							</OnEnter>
+							<OnLeave>
+							</OnLeave>
+						</Scripts>
+					</Slider>
+				</Frames>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetParent():GetName().."_Appearance_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Aliases_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Blacklist_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Profiles_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_History_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Channels_Panel"):Hide()
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_History_Panel" frameStrata="ARTWORK" movable="false" hidden="true">
+				<Size>
+					<AbsDimension x="360" y="255"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-80" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="11" right="12" top="12" bottom="11" />	
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<!--First Column-->
+						<FontString Name="FCGeneric1" inherits="GameFontNormal" text="History Options">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-12" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_RecordHistory" inherits="GameFontNormal" text="Record History">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="20" y="-30" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_EmptyOnLoad" inherits="GameFontNormal" text="Flush On Load">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent_Label_RecordHistory" relativePoint="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					
+						<FontString Name="$parent_Label_HistoryLines" inherits="GameFontNormal" text="Widget History:">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="200" y="-30" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="$parent_Label_HistoryLinesNum" inherits="GameFontNormal" text="20">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent_Label_HistoryLines" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="130" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						
+					</Layer>
+				</Layers>
+				<Frames>
+					<CheckButton name="$parent_RecordHistory_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_RecordHistory" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("RecordHistory", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("RecordHistory"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Toggles chat logging", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_EmptyOnLoad_Toggle" inherits="FCCheckTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_Label_EmptyOnLoad" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=this:GetChecked()
+								if(state==nil)then state=0 end
+								FCCC_SetVariable("EmptyOnLoad", state)
+							</OnClick>
+							<OnShow>
+								this:SetChecked(FCCC_GetVariable("EmptyOnLoad"))
+							</OnShow>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Flushes all recorded history when the game logs in", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					
+					<Slider name="$parent_MaxFrames_Slider" inherits="FCBlankSliderTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_Label_HistoryLines" relativePoint="BOTTOMLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								this:SetMinMaxValues(0,50)
+								this:SetValueStep(1)
+							</OnLoad>
+							<OnShow>
+								this:SetValue(FCCC_GetVariable("HistoryLinesInWidget"))
+							</OnShow>
+							<OnValueChanged>
+								FCCC_Options_History_Panel_Label_HistoryLinesNum:SetText(this:GetValue())
+								FCCC_SetVariable("HistoryLinesInWidget",this:GetValue())
+							</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Button name="$parent_ResetCurrentCharacter" inherits="OptionsButtonTemplate" text="Delete History">
+						<Size>
+							<AbsDimension x="130" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_Label_HistoryLines">
+								<Offset>
+								<AbsDimension x="0" y="-20" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if(this:GetText()=="Delete History")then
+									this:SetText("Click to confirm!")
+								elseif(this:GetText()=="Click to confirm!")then
+									this:SetText("Delete History")
+									ForgottenChat_History[FCCC_GetPlayerIndex()]={}
+									DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat Control Center:|r Whisper history flushed for "..UnitName("player").." of "..GetRealmName(), 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetParent():GetName().."_Appearance_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Aliases_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Blacklist_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Profiles_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Behavior_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Channels_Panel"):Hide()
+					</OnShow>
+				</Scripts>
+			</Frame>
+		
+			<Frame name="$parent_Channels_Panel" frameStrata="ARTWORK" movable="false" hidden="true">
+				<Size>
+					<AbsDimension x="360" y="255"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-80" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="11" right="12" top="12" bottom="11" />	
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<Layer level="ARTWORK">
+						<!--First Column-->
+						<FontString Name="FCChanLabel" inherits="GameFontNormal" text="Select a widget">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="20" y="-15" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="FCGeneric8" inherits="GameFontNormal" text="Channel Support">
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="-12" y="-10" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						
+						<FontString Name="FCChanDetailsName" inherits="GameFontNormal" text="Widget Title:" hidden="true">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-150" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="FCChanDetailsCombatHide" inherits="GameFontNormal" text="Combat Minimize:" hidden="true">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-180" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="FCChanDetailsCombatShow" inherits="GameFontNormal" text="Combat Maximize:" hidden="true">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-200" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+							
+						<!--Second Column-->
+						<FontString Name="FCChanDetailsUse" inherits="GameFontNormal" text="Use This Widget:" hidden="true">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="190" y="-180" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString Name="FCChanDetailsMinimizeUp" inherits="GameFontNormal" text="Minimize Up" hidden="true">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+									<AbsDimension x="190" y="-200" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button Name="FCChanWidg1" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="15" y="-25" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Widget 1">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnMouseDown>
+								FCC_ShowChannels(arg1,1)
+							</OnMouseDown>
+							<OnClick>
+								FCC_ShowEditOptions(1)
+								FCChannelSave.Num=1
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="FCChanWidg2" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="FCChanWidg1" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Widget 2">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnMouseDown>
+								FCC_ShowChannels(arg1,2)
+							</OnMouseDown>
+							<OnClick>
+								FCC_ShowEditOptions(2)
+								FCChannelSave.Num=2
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="FCChanWidg3" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="FCChanWidg2" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Widget 3">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnMouseDown>
+								FCC_ShowChannels(arg1,3)
+							</OnMouseDown>
+							<OnClick>
+								FCC_ShowEditOptions(3)
+								FCChannelSave.Num=3
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="FCChanWidg4" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="FCChanWidg3" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Widget 4">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnMouseDown>
+								FCC_ShowChannels(arg1,4)
+							</OnMouseDown>
+							<OnClick>
+								FCC_ShowEditOptions(4)
+								FCChannelSave.Num=4
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="FCChanWidg5" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="FCChanWidg4" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Widget 5">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnMouseDown>
+								FCC_ShowChannels(arg1,5)
+							</OnMouseDown>
+							<OnClick>
+								FCC_ShowEditOptions(5)
+								FCChannelSave.Num=5
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="FCChanWidg6" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="FCChanWidg5" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Widget 6">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnMouseDown>
+								FCC_ShowChannels(arg1,6)
+							</OnMouseDown>
+							<OnClick>
+								FCC_ShowEditOptions(6)
+								FCChannelSave.Num=6
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button Name="FCChanWidg7" inherits="FCButtonTemplate">
+						<Size>
+							<AbsDimension x="340" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="FCChanWidg6" relativePoint="BOTTOM">
+								<Offset>
+									<AbsDimension x="0" y="5" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Widget 7">
+									<Anchors>
+										<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT">
+											<Offset>
+												<AbsDimension x="10" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnMouseDown>
+								FCC_ShowChannels(arg1,7)
+							</OnMouseDown>
+							<OnClick>
+								FCC_ShowEditOptions(7)
+								FCChannelSave.Num=7
+							</OnClick>
+						</Scripts>
+					</Button>
+					
+					
+					<CheckButton name="FCDisableChannels" inherits="FCCheckTemplate" hidden="false">
+						<Size>
+							<AbsDimension x="20" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="FCGeneric8" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="-20" y="0" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								state=getglobal("FCDisableChannels"):GetChecked()
+								FCC_ToggleOption("ChannelState", state)
+								FCC_HideEditOptions(FCChannelSave.Num)
+								FCC_SetupOptionFrame()
+								DEFAULT_CHAT_FRAME:AddMessage("|cff0000FFForgotten Chat:|r You have toggled an option that requires the console be reloaded", 100, 100, 100, 1.0, UIERRORS_HOLD_TIME)
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+								GameTooltip:SetBackdropColor(0.0, 0.0, 0.0);
+								GameTooltip:SetText("Disables Channel Support", 1.0, 1.0, 1.0);
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="FCCombatHideEntry" inherits="FCCheckTemplate" hidden="true">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="FCChanDetailsCombatHide" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if(this:GetChecked()==1) and (FCCombatShowEntry:GetChecked()==1) then
+									FCCombatShowEntry:SetChecked(0)
+								end
+							</OnClick>
+							<OnEnter>
+							</OnEnter>
+							<OnLeave>
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="FCCombatShowEntry" inherits="FCCheckTemplate" hidden="true">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="FCChanDetailsCombatShow" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if(this:GetChecked()==1) and (FCCombatHideEntry:GetChecked()==1) then
+									FCCombatHideEntry:SetChecked(0)
+								end
+							</OnClick>
+							<OnEnter>
+							</OnEnter>
+							<OnLeave>
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="FCUseEntry" inherits="FCCheckTemplate" hidden="true">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="FCChanDetailsUse" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if(this:GetChecked()==1)then getglobal("FC_Channel"..FCChannelSave.Num):Show() else getglobal("FC_Channel"..FCChannelSave.Num):Hide() end
+							</OnClick>
+							<OnEnter>
+							</OnEnter>
+							<OnLeave>
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="FCMinUp" inherits="FCCheckTemplate" hidden="true">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="FCChanDetailsMinimizeUp" relativePoint="LEFT">
+								<Offset>
+									<AbsDimension x="120" y="-2" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								
+							</OnClick>
+							<OnEnter>
+							</OnEnter>
+							<OnLeave>
+							</OnLeave>
+						</Scripts>
+					</CheckButton>
+					<EditBox name="FCChanNameEntry" autoFocus="false" frameStrata="HIGH" hidden="true">
+						<Size>
+							<AbsDimension x="130" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="FCChanDetailsName" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="10" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="LEFT">
+											<Offset>
+												<AbsDimension x="-10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0" right="0.2" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+								<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+									<Size>
+										<AbsDimension x="75" y="32"></AbsDimension>
+									</Size>
+									<Anchors>
+										<Anchor point="RIGHT">
+											<Offset>
+												<AbsDimension x="10" y="0"></AbsDimension>
+											</Offset>
+										</Anchor>
+									</Anchors>
+									<TexCoords left="0.7" right="1.0" top="0" bottom="1.0"></TexCoords>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnShow>
+								this:ClearFocus();
+							</OnShow>
+							<OnLoad>
+								this:SetTextInsets(10,10,0,0)
+							</OnLoad>
+							<OnEnterPressed>
+								this:ClearFocus();
+							</OnEnterPressed>
+							<OnEscapePressed>
+								this:ClearFocus();
+							</OnEscapePressed>
+							<OnTabPressed>
+								
+							</OnTabPressed>
+						</Scripts>
+						<FontString inherits="ChatFontNormal" bytes="256"/>
+					</EditBox>
+					<Button Name="FCChannelSave" inherits="OptionsButtonTemplate" hidden="true">
+						<Size>
+							<AbsDimension x="100" y="20"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="-10" y="-146" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString Name="$parent_Name" inherits="GameFontNormal" text="Save">
+									<Anchors>
+										<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">
+											<Offset>
+												<AbsDimension x="0" y="0" />
+											</Offset>
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Scripts>
+							<OnLoad>
+								this.Num=8
+							</OnLoad>
+							<OnClick>
+								FCC_HideEditOptions(this.Num)
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnShow>
+						getglobal(this:GetParent():GetName().."_Appearance_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Aliases_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Blacklist_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Profiles_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_Behavior_Panel"):Hide()
+						getglobal(this:GetParent():GetName().."_History_Panel"):Hide()
+					</OnShow>
+				</Scripts>
+			</Frame>
+			
+		
+		
+			<Button name="$parent_Close" inherits="OptionsButtonTemplate" text="Close">
+				<Size>
+					<AbsDimension x="125" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+						<Offset>
+						<AbsDimension x="-5" y="10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("ADDON_LOADED");
+				this:RegisterEvent("CHAT_MSG_WHISPER");
+				this:RegisterEvent("CHAT_MSG_WHISPER_INFORM"); 
+				this:RegisterEvent("WHO_LIST_UPDATE")
+				this:RegisterEvent("PLAYER_REGEN_DISABLED");
+				this:RegisterEvent("PLAYER_REGEN_ENABLED");
+				this:RegisterEvent("CHAT_MSG_AFK");
+				FCCC_OnLoad()
+			</OnLoad>
+			<OnEvent>
+				FCCC_OnEvent(event)
+			</OnEvent>
+		</Scripts>	
+	</Frame>
+	
+</Ui>

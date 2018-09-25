@@ -1,0 +1,698 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="ForgottenChatCore.lua"/>
+		<Scripts>
+			<OnLoad>
+			</OnLoad>
+			<OnEvent>
+			</OnEvent>
+        </Scripts>
+	<!--Virtual Frames-->
+	<Frame name="IM" frameStrata="BACKGROUND" movable="true" enableMouse="true" hidden="true" parent="UIParent" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="200"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOP" relativeTo="UIParent" relativePoint="CENTER"/>
+		</Anchors>
+		<Backdrop name="$parent_Backdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString Name="$parent_WhoField" inherits="GameFontNormal" text="Error retrieving /Who information">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="20" y="8" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_CloseButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="17" y="17"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-8" y="-6"/>
+						</Offset>
+					</Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						FC_CloseButtonClicked(this:GetParent():GetName())
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Up.tga"/>
+				<PushedTexture file="Interface\AddOns\ForgottenChatCC\CloseButton-Down.tga"/>
+			</Button>
+			<Button name="$parent_MinimizeButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="17" y="17"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parent_CloseButton" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-2" y=""/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						FC_ToggleMinimizeWindow(this:GetParent():GetName())
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ForgottenChatCC\MinimizeButton-Up.tga"/>
+				<PushedTexture file="Interface\AddOns\ForgottenChatCC\MinimizeButton-Down.tga"/>
+			</Button>			
+			<ScrollingMessageFrame name="$parent_Chat" inherits="ChatFrameTemplate">
+				<Size>
+					<AbsDimension x="380" y="150"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+				</Frames>
+				<Scripts>
+					<OnMouseDown>
+						thisHeight=ceil(this:GetParent():GetHeight())
+						if not(thisHeight==30)then
+							FC_ShowEditBox(this:GetParent():GetName(), "CLICK")
+						end
+					</OnMouseDown>
+					<OnLoad>
+					</OnLoad>
+					<OnEvent>
+					</OnEvent>
+					<OnUpdate>
+						if(this.LinksFixed~=1)then
+							this:Hide()
+							this:Show()
+							this.LinksFixed=1
+						end
+						ChatFrame_OnUpdate(arg1);
+					</OnUpdate>
+					<OnHide>
+						this.LinksFixed=0
+					</OnHide>
+					<OnHyperlinkClick>
+						ChatFrame_OnHyperlinkShow(arg1, arg2, arg3);
+					</OnHyperlinkClick>
+					<OnMouseWheel>
+						if ( tonumber(arg1) > 0 ) then
+							if(IsControlKeyDown())then
+								this:ScrollToTop()
+							else
+								this:ScrollUp()
+							end
+						else
+							if(IsControlKeyDown())then
+								this:ScrollToBottom()
+							else
+								this:ScrollDown()
+							end
+						end
+					</OnMouseWheel> 
+				</Scripts>
+			</ScrollingMessageFrame>
+			<EditBox name="$parent_EditBox" ignoreArrows="true" frameStrata="DIALOG" toplevel="true" historyLines="32" letters="255" hidden="false">
+				<Size>
+					<AbsDimension x="5" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="8"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop name="$parent_Backdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="4" right="4" top="4" bottom="4"/>
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="16"/>
+					</EdgeSize>
+				</Backdrop>
+				<Layers>
+					<!--<Layer level="BACKGROUND">
+						<Texture name="$parentLeft" file="">
+							<Size>
+								<AbsDimension x="256" y="32"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT"/>
+							</Anchors>
+						</Texture>
+						<Texture name="$parentRight" file="">
+							<Size>
+								<AbsDimension x="16" y="32"/>
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.9375" right="1.0" top="0" bottom="1.0"/>
+						</Texture>
+						<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+							<Size>
+								<AbsDimension x="1" y="32"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.9375" top="0" bottom="1.0"/>
+						</Texture>
+					</Layer>-->
+					<Layer level="ARTWORK">
+						<FontString name="$parentHeader" inherits="ChatFontNormal">
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="13" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parentLanguage" hidden="true">
+						<Size>
+							<AbsDimension x="32" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativePoint="RIGHT">
+								<Offset>
+									<AbsDimension x="-8" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								this:GetParent():ToggleInputLanguage();
+							</OnClick>
+						</Scripts>
+						<NormalTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+						<NormalText inherits="DialogButtonNormalText"/>
+					</Button>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						this:SetTextInsets(15,15,0,0)
+					</OnLoad>
+					<OnShow>
+						for i=1, 6 do
+							if(tonumber(string.sub(this:GetName(),7,7))~=i)then
+								getglobal("Window"..i.."_EditBox"):Hide()
+							end
+						end
+						FC_SetLastOpenBox(this:GetName())
+						this:ClearFocus()
+						this:SetText("")
+					</OnShow>
+					<OnHide>
+						FC_SetLastOpenBox("")
+					</OnHide>
+					<OnEnterPressed>
+						FC_EnterPressed(this:GetParent():GetName())
+					</OnEnterPressed>
+					<OnEscapePressed>
+						FC_EscapePressed(this:GetParent():GetName())
+					</OnEscapePressed>
+					<OnSpacePressed>
+						<!--ChatEdit_OnSpacePressed();-->
+					</OnSpacePressed>
+					<OnTextChanged>
+						if(FCVar_ReplyHotkeyPressed==1)then
+							this:SetText("")
+							FCVar_ReplyHotkeyPressed=0
+						end
+					</OnTextChanged>
+				</Scripts>
+				<FontString inherits="ChatFontNormal" bytes="256"/>
+			</EditBox>
+			<Button Name="$parent_MoveIt">
+				<Size>
+					<AbsDimension x="400" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString Name="$parent_Alias" inherits="GameFontNormal" text="Alias">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="20" y="-8" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnMouseDown>
+						if(IsShiftKeyDown())then
+							SendWho(this:GetParent().Name)
+							return
+						end
+						if(FCCC_GetVariable("UseAnchor")=="OFF")then
+							this:GetParent():StartMoving()
+						end
+					</OnMouseDown>
+					<OnMouseUp>
+						if(FCCC_GetVariable("UseAnchor")=="OFF")then
+							this:GetParent():StopMovingOrSizing()
+						end
+					</OnMouseUp>
+					<OnDoubleClick>
+						FC_ToggleMinimizeWindow(this:GetParent():GetName())
+					</OnDoubleClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_BottomButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="25" y="5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parentFlash" file="Interface\ChatFrame\UI-ChatIcon-BlinkHilight" hidden="true"/>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_Chat"):ScrollToBottom();
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollEnd-Up"/>
+				<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollEnd-Down"/>
+				<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollEnd-Disabled"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parent_DownButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM" relativeTo="$parent_BottomButton" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this.lastUpdate=0
+					</OnLoad>
+					<OnUpdate>
+						if(this:GetButtonState()=="PUSHED")then
+							this.lastUpdate=this.lastUpdate+arg1
+							if(this.lastUpdate>=.05)then
+								getglobal(this:GetParent():GetName().."_Chat"):ScrollDown();
+								this.lastUpdate=0
+							end
+						end						
+					</OnUpdate>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_Chat"):ScrollDown();
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up"/>
+				<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down"/>
+				<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parent_UpButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOM" relativeTo="$parent_DownButton" relativePoint="TOP"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this.lastUpdate=0
+					</OnLoad>
+					<OnUpdate>
+						if(this:GetButtonState()=="PUSHED")then
+							this.lastUpdate=this.lastUpdate+arg1
+							if(this.lastUpdate>=.05)then
+								getglobal(this:GetParent():GetName().."_Chat"):ScrollUp();
+								this.lastUpdate=0
+							end
+						end				
+					</OnUpdate>
+					<OnClick>
+						getglobal(this:GetParent():GetName().."_Chat"):ScrollUp();
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollUp-Up"/>
+				<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollUp-Down"/>
+				<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollUp-Disabled"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			
+			<Button name="$parent_IgnoreButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="5"/>
+						</Offset>
+					</Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						AddIgnore(this:GetParent().Name)
+						FC_DeAllocateFrameByName(this:GetParent().Name)
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+						GameTooltip:SetBackdropColor(0.3, 0.3, 0.3);
+						GameTooltip:SetText("Ignore", 1.0, 1.0, 1.0);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\Spell_Arcane_MindMastery"/>
+				<PushedTexture file="Interface\Icons\Spell_Arcane_MindMastery"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parent_InviteButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parent_IgnoreButton" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y=""/>
+						</Offset>
+					</Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						InviteUnit(this:GetParent().Name)
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+						GameTooltip:SetBackdropColor(0.3, 0.3, 0.3);
+						GameTooltip:SetText("Invite", 1.0, 1.0, 1.0);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\INV_Misc_GroupNeedMore"/>
+				<PushedTexture file="Interface\Icons\INV_Misc_GroupNeedMore"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parent_DoWhoButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parent_InviteButton" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y=""/>
+						</Offset>
+					</Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						SendWho(this:GetParent().Name)
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+						GameTooltip:SetBackdropColor(0.3, 0.3, 0.3);
+						GameTooltip:SetText("/who", 1.0, 1.0, 1.0);
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\INV_Misc_QuestionMark"/>
+				<PushedTexture file="Interface\Icons\INV_Misc_QuestionMark"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			
+		</Frames>
+		<Scripts>
+			<OnEnter>
+				thisHeight=ceil(this:GetHeight())
+				if not(thisHeight==30)then
+					FC_ShowEditBox(this:GetName(), "ENTER")
+				end
+			</OnEnter>
+			<OnLeave>
+			</OnLeave>
+			<OnShow>
+				this.SecondsSinceLastEvent=0
+			</OnShow>
+			<OnLoad>
+				this.Name="Null"
+				this.Minimized=0
+				this.TimeSinceLastUpdate = 0 
+				this.PulseStep=1
+				this.isPulsing=false
+			</OnLoad>
+			<OnEvent>
+			</OnEvent>
+			<OnUpdate>
+				if(FCCC_GetVariable("TimeoutSeconds")>0)then
+					if(this.Minimized==0)then this.SecondsSinceLastEvent=this.SecondsSinceLastEvent+arg1 end
+					if(this.SecondsSinceLastEvent>FCCC_GetVariable("TimeoutSeconds"))then
+						FC_TimeoutFrame(this:GetName())
+					end
+				end
+				FC_PulseWidget(arg1)
+			</OnUpdate>
+		</Scripts>	
+	</Frame>
+	
+	<!--Commonly Used Frames -->
+	<Frame name="FCAnchorFrame" toplevel="true" frameStrata="HIGH" movable="true" enableMouse="true" hidden="false" parent="UIParent">
+		<Size>
+			<AbsDimension x="400" y="30"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER"/>
+		</Anchors>
+		<Backdrop name="$parent_Backdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="Artwork">
+				<FontString Name="$parent_TitleField" inherits="GameFontNormal" text="|cff0000FFForgottenChat|r">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="-8" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_CloseButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="17" y="17"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-8" y="-6"/>
+						</Offset>
+					</Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						FC_MassClose()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ForgottenChatCC\Images\CloseButton-UpAnchor.tga"/>
+				<PushedTexture file="Interface\AddOns\ForgottenChatCC\Images\CloseButton-DownAnchor.tga"/>
+			</Button>
+			<Button name="$parent_MaximizeButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="17" y="17"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parent_CloseButton" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-2" y=""/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						FC_MassMaximize()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ForgottenChatCC\Images\MaximizeButton-UpAnchor.tga"/>
+				<PushedTexture file="Interface\AddOns\ForgottenChatCC\Images\MaximizeButton-DownAnchor.tga"/>
+			</Button>	
+			<Button name="$parent_MinimizeButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="17" y="17"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parent_MaximizeButton" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-2" y=""/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						FC_MassMinimize()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ForgottenChatCC\Images\MinimizeButton-UpAnchor.tga"/>
+				<PushedTexture file="Interface\AddOns\ForgottenChatCC\Images\MinimizeButton-DownAnchor.tga"/>
+			</Button>	
+			<Button name="$parent_HideButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="17" y="17"/>
+				</Size>
+				<Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parent_MinimizeButton" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-2" y=""/>
+                        </Offset>
+                    </Anchor>s
+                </Anchors>
+				<Scripts>
+					<OnClick>
+						
+					</OnClick>
+					<OnLoad>
+						this:Disable()
+					</OnLoad>
+				</Scripts>
+				<NormalTexture file="Interface\AddOns\ForgottenChatCC\Images\HideButton-UpAnchor.tga"/>
+				<PushedTexture file="Interface\AddOns\ForgottenChatCC\Images\HideButton-DownAnchor.tga"/>
+			</Button>	
+		</Frames>
+		<Scripts>
+			<OnMouseDown>
+				if(FCCC_GetVariable("LockAnchor")==1)then
+				
+				else
+					this:StartMoving()
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				if(FCCC_GetVariable("LockAnchor")==1)then
+				
+				else
+					this:StopMovingOrSizing()
+				end
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+		
+	<Frame name="TempStackSplitter">
+		<Scripts>
+			<OnShow>
+				this:Hide()
+			</OnShow>
+			<OnHide>
+			</OnHide>
+		</Scripts>	
+	</Frame>
+	
+	<Frame name="FCLoader" toplevel="true" frameStrata="MEDIUM" movable="true" enableMouse="true" hidden="true" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("CRAFT_SHOW")
+				this:RegisterEvent("TRADE_SKILL_SHOW")
+				this:RegisterEvent("AUCTION_HOUSE_SHOW")
+				this:RegisterEvent("TRADE_SHOW")
+				FC_OnLoad()
+			</OnLoad>
+			<OnEvent>
+				if(event=="CRAFT_SHOW")then
+					FC_SetupCraftHooks()
+				elseif(event=="TRADE_SKILL_SHOW")then
+					FC_SetupTradeskillHooks()
+				elseif(event=="AUCTION_HOUSE_SHOW")then
+					FC_SetupAuctionHooks()
+				elseif(event=="TRADE_SHOW")then
+					FC_SetupTradeHooks()
+				end
+			</OnEvent>
+		</Scripts>	
+	</Frame>
+	
+	<Frame name="Window1" inherits="IM"/>
+	<Frame name="Window2" inherits="IM"/>
+	<Frame name="Window3" inherits="IM"/>
+	<Frame name="Window4" inherits="IM"/>
+	<Frame name="Window5" inherits="IM"/>
+	<Frame name="Window6" inherits="IM"/>
+	<Frame name="Window7" inherits="IM"/>
+	<Frame name="Window8" inherits="IM"/>
+	<Frame name="Window9" inherits="IM"/>
+	<Frame name="Window10" inherits="IM"/>
+	<Frame name="Window11" inherits="IM"/>
+	<Frame name="Window12" inherits="IM"/>
+</Ui>

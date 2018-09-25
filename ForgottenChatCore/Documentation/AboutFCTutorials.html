@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>ForgottenChat Documentation</title>
+<style type="text/css">
+<!--
+.style3 {
+	font-size: 24px;
+	color: #000066;
+}
+.style4 {
+	font-size: 12px;
+	color: #000000;
+}
+.style6 {font-size: large}
+.style8 {color: #9900FF}
+.style9 {color: #FF0000}
+.style10 {color: #000066}
+-->
+</style>
+</head>
+
+<body>
+<div align="center">
+  <p class="style3">ForgottenChat Tutorials <br />
+    <span class="style4">How do I do that!1!!one1  </span></p>
+  <hr />
+</div>
+<p align="justify">In this section I have placed simple tutorials which I hope will illustrate some of the more complex features of ForgottenChat </p>
+<p align="justify"><span class="style6">Please select a tutorial:<a name="TutTOP" id="TutTOP"></a></span></p>
+<div align="justify">
+  <ul>
+    <li><a href="#TutChanSupp">Setting up Channel Support for /guild and /party </a></li>
+    <li><a href="#TutAnonRep">Disable Anonymous Statistics Reporting for Icecrown characters. </a></li>
+  </ul>
+</div>
+<p align="justify">&nbsp;</p>
+<p align="justify">&nbsp;</p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><hr />
+&nbsp;</p>
+
+<div>
+  <p align="center" class="style6">Setting up Channel Support for /guild and /party<a name="TutChanSupp" id="TutChanSupp"></a></p>
+  <p align="justify">I have been asked a couple times how to set up the guild channel and party raid channels within their own widget.  This can currently be done with the Channel Support feature for any channel you chose, so this tutorial can be expanded beyond /g and /p.  I will warn you that a thorough understanding of the Default WoW chatframes will make this much easier, so I shall provide a rundown.</p>
+  <p align="justify">There are seven (7) standard WoW chatframes.  New users or characters will only be shown two of them, one with all the default stuff shown on them, such as loot, /1-/4, whispers, /p etc, and another for the Combat Log.  These are numbered (respectivly) #1, and #2.  Users can create more chatframes (#3-#7) and assign any combination of channels to any combinations of chatframes.
+  <p align="justify">For the sake of argument, pretend I am using this basic setup: 
+  <ol>
+    <li><span class="style10" align="justify">All Channels other than Combat Logs!</span></li>
+    <li><span class="style10" align="justify"> Combat Log</span></li>
+    <li><span class="style10" align="justify"> Unused </span></li>
+    <li><span class="style10" align="justify"> Unused </span></li>
+    <li><span class="style10" align="justify"> Unused </span></li>
+    <li><span class="style10" align="justify"> Unused</span></li>
+    <li><span class="style10" align="justify">Unused </span>
+    </li>
+  </ol>
+  <p align="justify">My plan is to make ForgottenChat Channel Widgets for Guild related, and Party related channels. Here is how: <br /><br /><br /><br /><br /><br />  
+  <p align="right"><br />
+    <br />
+    <br />
+    <em><strong><a href="#TutTOP">BACK TO THE TOP</a></strong></em><br />
+    <br />
+    </div>
+  <hr/>
+  <div>
+  <p align="center" class="style6">Disable Anonymous Statistics Reporting for Icecrown characters.<a name="TutAnonRep" id="TutAnonRep"></a></p>
+  <p align="justify">Your first question will be &quot;huh WHAT? what is this?&quot; and I shall tell you. Since my main character is on the realm Icecrown, I thought it would be interesting to know how many people use ForgottenChat, and what sort of pattern there is among my users. To that end, I created the Icecrown Anonymous Report system. that means that if you are logged into Icecrown and have ForgottenChat enabled and my main (Rachelle - Alliance) is logged in, you will send me an automated whisper about yourself. The info that I get is the following:</p>
+  <ul>
+    <li class="style10">Your characters name</li>
+    <li class="style10">Your guild name </li>
+    <li class="style10">Your current level</li>
+    <li class="style10">Your class </li>
+    <li class="style10">Your race</li>
+    <li class="style10">Your rank within your guild</li>
+    <li class="style10">The version of ForgottenChat you are currently using </li>
+    </ul>
+  <p>For instance, my main 'Rachelle' sends to herself upon login this whisper: <br />
+    <span class="style8">[Rachelle] &lt;FC&gt; Using Version: 2.2.1 Level: 60  Class: Mage Race: 'Human' Guild: Knights Who Say Ni' GRank: 'Kniggit'</span></p>
+  <p>Forgotten Chat hides this from the user, and I have another mod on my end which tracks all these whispers for statistics purposes. This was designed to be as unintrusive as possible, but I can understand some people not wishing me to have this information, so here is how to disable it:</p>
+  <p>Open up the ForgottenChat.lua file in your favorite text editor, and search for the line of code starting with this text:<br />
+    <span class="style9">    SendChatMessage(&quot;&lt;FC&gt; Using Version:</span><br />
+    Either delete the entire line, or comment it out by placing two dashes in front of it: <br />
+    <span class="style9">--SendChatMessage(&quot;&lt;FC&gt; Using Version:</span></p>
+  <p>If more code is deleted or commented out, I cannot guarentee that ForgottenChat will still function properly. Every time you update ForgottenChat, you must repeat this method. This is only if you play regularly on the Alliance side of Icecrown, otherwise nothing will happen, nobody will get this information. </p>
+  <p>&nbsp;</p>
+  <p align="right"><em><strong><a href="#TutTOP">BACK TO THE TOP</a> </strong></em></p>
+</div>
+</body>
+</html>

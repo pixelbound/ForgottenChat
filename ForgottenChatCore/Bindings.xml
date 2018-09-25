@@ -1,0 +1,17 @@
+<Bindings>
+	<Binding name="BINDING_FCC1" header="FORGOTTENCHATCORE">
+		FC_OpenLastReply();
+	</Binding>
+	<Binding name="BINDING_FCC2" header="FORGOTTENCHATCORE">
+		FC_MassMinimize();
+	</Binding>
+	<Binding name="BINDING_FCC3" header="FORGOTTENCHATCORE">
+		FC_MassMaximize();
+	</Binding>
+	<Binding name="BINDING_FCC4" header="FORGOTTENCHATCORE">
+		FC_MassClose();
+	</Binding>
+	<Binding name="BINDING_FCC5" header="FORGOTTENCHATCORE">
+		FC_ToggleEnableDisable();
+	</Binding>
+</Bindings>
