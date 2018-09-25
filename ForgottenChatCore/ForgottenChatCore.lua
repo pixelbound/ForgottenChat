@@ -47,7 +47,7 @@ function FC_OnLoad()
 	FC_hooksecurefunc("ContainerFrameItemButton_OnClick",FC_ContainerFrameItemButton_OnClick)
 	--hooksecurefunc("PaperDollItemSlotButton_OnModifiedClick",FC_PaperDollItemSlotButton_OnModifiedClick)
 	--hooksecurefunc("MerchantItemButton_OnModifiedClick",FC_MerchantItemButton_OnModifiedClick)
-	--hooksecurefunc("BankFrameItemButtonGeneric_OnModifiedClick",FC_BankFrameItemButtonGeneric_OnModifiedClick)
+	FC_hooksecurefunc("BankFrameItemButtonGeneric_OnClick",FC_BankFrameItemButtonGeneric_OnClick)
 	FC_hooksecurefunc("QuestLogRewardItem_OnClick",FC_QuestLogRewardItem_OnClick)
 	FC_hooksecurefunc("LootButton_OnModifiedClick",FC_LootButton_OnModifiedClick)
 	FC_SetupLootRollBoxHooks()
@@ -795,7 +795,7 @@ function FC_MerchantItemButton_OnModifiedClick(button)
 		end
 	end
 end
-function FC_BankFrameItemButtonGeneric_OnModifiedClick(button)
+function FC_BankFrameItemButtonGeneric_OnClick(button)
 	if(FCVar_CurrentlyOpenEditBox~="")then
 		if ( button == "LeftButton" ) then
 			if ( IsShiftKeyDown() and not this.isBag ) then
