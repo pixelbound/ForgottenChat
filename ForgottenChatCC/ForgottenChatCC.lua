@@ -100,15 +100,6 @@ function FCCC_SlashHandler(msg)
 		if(IsFCCoreInstalled==1)then
 			FC_Enable()
 		end
-		if(IsFCLogInstalled==1)then
-		
-		end
-		if(IsFCTabsInstalled==1)then
-		
-		end
-		if(IsFCLogInstalled==1)then
-		
-		end
 		
 		if(FCVar_UserDisabled==true)then
 			OldChatFrame_OnEvent=ChatFrame_OnEvent
@@ -120,15 +111,6 @@ function FCCC_SlashHandler(msg)
 	elseif(msg=="disable")then
 		if(IsFCCoreInstalled==1)then
 			FC_Disable()
-		end
-		if(IsFCLogInstalled==1)then
-		
-		end
-		if(IsFCTabsInstalled==1)then
-		
-		end
-		if(IsFCLogInstalled==1)then
-		
 		end
 		
 		if(FCVar_UserDisabled==false)then
@@ -256,9 +238,6 @@ function FCCC_IncomingMessage(Name, Text, afk)
 	if(IsFCLogInstalled==1)then
 		FCL_IncomingMessage(Name, Text, afk)
 	end
-	if(IsFCTabsInstalled==1)then
-	
-	end
 	
 	
 	--Allows the user to press R to reply wo whispers.
@@ -271,9 +250,6 @@ function FCCC_OutgoingMessage(Name, Text, Language)
 	if(IsFCLogInstalled==1)then
 		FCL_OutgoingMessage(Name, Text, Language)
 	end
-	if(IsFCTabsInstalled==1)then
-	
-	end	
 	
 	ChatEdit_SetLastToldTarget(ChatFrame1.editBox, Name)
 end
