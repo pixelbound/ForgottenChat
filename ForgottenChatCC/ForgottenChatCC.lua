@@ -262,7 +262,7 @@ function FCCC_IncomingMessage(Name, Text, afk)
 	
 	
 	--Allows the user to press R to reply wo whispers.
-	ChatEdit_SetLastTellTarget(Name, ChatFrame1.editBox)
+	ChatEdit_SetLastTellTarget(ChatFrame1.editBox, Name)
 end
 function FCCC_OutgoingMessage(Name, Text, Language)
 	if(IsFCCoreInstalled==1)then
@@ -275,7 +275,7 @@ function FCCC_OutgoingMessage(Name, Text, Language)
 	
 	end	
 	
-	ChatEdit_SetLastToldTarget(Name, ChatFrame1.editBox)
+	ChatEdit_SetLastToldTarget(ChatFrame1.editBox, Name)
 end
 function FCCC_AFKMessage(name, message)
 	if(IsFCCoreInstalled==1)then
