@@ -49,7 +49,7 @@ function FC_OnLoad()
 	FC_hooksecurefunc("MerchantItemButton_OnClick",FC_MerchantItemButton_OnClick)
 	FC_hooksecurefunc("BankFrameItemButtonGeneric_OnClick",FC_BankFrameItemButtonGeneric_OnClick)
 	FC_hooksecurefunc("QuestLogRewardItem_OnClick",FC_QuestLogRewardItem_OnClick)
-	FC_hooksecurefunc("LootButton_OnModifiedClick",FC_LootButton_OnModifiedClick)
+	FC_hooksecurefunc("LootFrameItem_OnClick",FC_LootFrameItem_OnClick)
 	FC_SetupLootRollBoxHooks()
 	LoadAddOn("Blizzard_InspectUI")
 	FC_hooksecurefunc("InspectPaperDollItemSlotButton_OnClick",FC_InspectPaperDollItemSlotButton_OnClick)
@@ -822,7 +822,7 @@ function FC_QuestLogRewardItem_OnClick()
 		end
 	end
 end
-function FC_LootButton_OnModifiedClick(button)
+function FC_LootFrameItem_OnClick(button)
 	if(FCVar_CurrentlyOpenEditBox~="")then
 		if ( button == "LeftButton" ) then
 			if ( IsShiftKeyDown() ) then
