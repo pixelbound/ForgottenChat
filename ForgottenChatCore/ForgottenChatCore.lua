@@ -46,7 +46,7 @@ function FC_OnLoad()
 	--Set up hooks
 	FC_hooksecurefunc("ContainerFrameItemButton_OnClick",FC_ContainerFrameItemButton_OnClick)
 	--hooksecurefunc("PaperDollItemSlotButton_OnModifiedClick",FC_PaperDollItemSlotButton_OnModifiedClick)
-	--hooksecurefunc("MerchantItemButton_OnModifiedClick",FC_MerchantItemButton_OnModifiedClick)
+	FC_hooksecurefunc("MerchantItemButton_OnClick",FC_MerchantItemButton_OnClick)
 	FC_hooksecurefunc("BankFrameItemButtonGeneric_OnClick",FC_BankFrameItemButtonGeneric_OnClick)
 	FC_hooksecurefunc("QuestLogRewardItem_OnClick",FC_QuestLogRewardItem_OnClick)
 	FC_hooksecurefunc("LootButton_OnModifiedClick",FC_LootButton_OnModifiedClick)
@@ -784,10 +784,10 @@ function FC_PaperDollItemSlotButton_OnModifiedClick(button)
 	end	
 					
 end
-function FC_MerchantItemButton_OnModifiedClick(button)
+function FC_MerchantItemButton_OnClick(button, ignoreModifiers)
 	if(FCVar_CurrentlyOpenEditBox~="")then
 		if ( MerchantFrame.selectedTab == 1 ) then
-			if ( button == "LeftButton" ) then
+			if ( button == "LeftButton" and not ignoreModifiers ) then
 				if ( IsShiftKeyDown() ) then
 					getglobal(FCVar_CurrentlyOpenEditBox):Insert(GetMerchantItemLink(this:GetID()))
 				end
